@@ -1,12 +1,7 @@
 function MarkdownTableFormatter() {
 }
 
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
-// Format Table - format_table(input_table)
 
 MarkdownTableFormatter.prototype.format_table = function(input_table) {
   console.log("Starting MarkdownTableFormatter.format_table()");
@@ -19,7 +14,6 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Get Column Widths - get_column_widths()
 
 MarkdownTableFormatter.prototype.get_column_widths = function() {
 
@@ -42,9 +36,7 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
 };
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
-// Set Column Widths - set_column_widths(input_cells)
 
 MarkdownTableFormatter.prototype.set_column_widths = function(input_cells) {
 
@@ -61,9 +53,9 @@ MarkdownTableFormatter.prototype.set_column_widths = function(input_cells) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Set Input Cells - set_input_cells(input_table)
 
 MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
+
   this.input_cells = new Array();
 
   var input_line_array = input_table.split("\n");
@@ -80,11 +72,11 @@ MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Set Input Lines - set_intput_lines(input_table)
 
 MarkdownTableFormatter.prototype.set_intput_lines = function(input_table) {
-  this.input_lines = input_table.split("\n");
-}
 
+  this.input_lines = input_table.split("\n");
+
+}
 
 
