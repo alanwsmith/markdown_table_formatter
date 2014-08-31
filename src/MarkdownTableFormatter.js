@@ -2,6 +2,19 @@ function MarkdownTableFormatter() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Format Table - format_table(input_table)
+
+MarkdownTableFormatter.prototype.format_table = function(input_table) {
+  console.log("Starting MarkdownTableFormatter.format_table()");
+  this.input_table = input_table;
+  this.set_intput_lines(input_table);
+  this.get_column_widths();
+  console.log("Finishing MarkdownTableFormatter.format_table()");
+  return input_table;
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
 // Get Column Widths - get_column_widths()
 
 MarkdownTableFormatter.prototype.get_column_widths = function() {
@@ -52,15 +65,4 @@ MarkdownTableFormatter.prototype.set_intput_lines = function(input_table) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Format Table - format_table(input_table)
-
-MarkdownTableFormatter.prototype.format_table = function(input_table) {
-  console.log("Starting MarkdownTableFormatter.format_table()");
-  this.input_table = input_table;
-  this.set_intput_lines(input_table);
-  this.get_column_widths();
-  console.log("Finishing MarkdownTableFormatter.format_table()");
-  return input_table;
-};
 
