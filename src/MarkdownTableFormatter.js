@@ -48,7 +48,7 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
 
 MarkdownTableFormatter.prototype.set_column_widths = function(input_cells) {
 
-  this.column_widths = new Array('', 2, 2, 2, '');
+  this.column_widths = new Array(0, 2, 2, 2, 0);
 }
 
 

@@ -22,12 +22,12 @@ describe("MarkdownTableFormatter", function() {
     input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
 
     mtf.set_column_widths(input_cells);
-    
-    expect(mtf.column_widths[0]).toBe('');
+
+    expect(mtf.column_widths[0]).toBe(0);
     expect(mtf.column_widths[1]).toBe(2);
     expect(mtf.column_widths[2]).toBe(2);
     expect(mtf.column_widths[3]).toBe(2);
-    expect(mtf.column_widths[4]).toBe('');
+    expect(mtf.column_widths[4]).toBe(0);
   });
 
   it("should properly identify a second set of target column widths when source has no padding", function() {
