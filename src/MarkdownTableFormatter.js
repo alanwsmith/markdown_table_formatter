@@ -4,14 +4,11 @@ function MarkdownTableFormatter() {
 ////////////////////////////////////////////////////////////////////////////////
 
 MarkdownTableFormatter.prototype.format_table = function(input_table) {
-  console.log("Starting MarkdownTableFormatter.format_table()");
   this.input_table = input_table;
   this.set_input_cells(input_table);
   this.set_column_widths(this.input_cells);
-  console.log("Finishing MarkdownTableFormatter.format_table()");
   return input_table;
 };
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
