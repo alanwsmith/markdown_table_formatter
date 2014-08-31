@@ -1,3 +1,7 @@
 function MarkdownTableFormatter() {
 }
-MarkdownTableFormatter.prototype.is_this_thing_on = "check 1, 2";
+
+MarkdownTableFormatter.prototype.format_table = function(input_table) {
+  return input_table;
+};
+
