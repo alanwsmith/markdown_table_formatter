@@ -39,6 +39,8 @@ describe("MarkdownTableFormatter", function() {
     expect(mtf.column_widths[3]).toBe(4);
   });
 
+
+
   it("should properly create the array of arrays for all table cells", function() {
     input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
     
