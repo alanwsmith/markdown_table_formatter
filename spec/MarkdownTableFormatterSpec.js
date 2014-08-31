@@ -1,15 +1,18 @@
 describe("MarkdownTableFormatter", function() {
   var mtf;
   var input_table;
+  var output_table;
 
   beforeEach(function() {
     mtf = new MarkdownTableFormatter();
     input_table = "";
+    output_table = "";
   });
 
   it("should not alter an already formatted table", function() {
     input_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |";
-    expect(mtf.format_table(input_table)).toEqual("| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |");
+    output_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |"
+    expect(mtf.format_table(input_table)).toEqual(output_table);
   });
 
   it("should properly identify target column widths when source has no padding", function() {
