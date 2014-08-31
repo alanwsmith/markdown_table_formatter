@@ -9,10 +9,6 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
     
     var cols = this.input_lines[lines_i].split("\|");
 
-    // remove the first and last that are just spacers for the markdown borders
-    cols.shift();
-    cols.pop();
-  
     // Loop through the items in each column
     for (var cols_i = 0, cols_l = cols.length; cols_i < cols_l; cols_i = cols_i + 1) {
       if (typeof this.column_widths[cols_i] === 'undefined') {
