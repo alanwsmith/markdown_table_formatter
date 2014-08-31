@@ -60,8 +60,6 @@ describe("MarkdownTableFormatter", function() {
 
 
 
-
-
   it("should properly create the array of arrays for all table cells", function() {
     input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
     
@@ -82,5 +80,30 @@ describe("MarkdownTableFormatter", function() {
     expect(mtf.input_cells[2][3]).toEqual('');
     
   });
+
+
+  it("should properly remove white space when loading the table", function() {
+
+    input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
+
+    mtf.set_input_cells(input_table);
+
+    expect(mtf.input_cells[0][0]).toEqual('');
+    expect(mtf.input_cells[0][1]).toEqual('h1');
+    expect(mtf.input_cells[0][2]).toEqual('h2');
+    expect(mtf.input_cells[0][3]).toEqual('h3');
+    expect(mtf.input_cells[0][4]).toEqual('h4');
+    expect(mtf.input_cells[0][5]).toEqual('');
+
+    expect(mtf.input_cells[2][0]).toEqual('');
+    expect(mtf.input_cells[2][1]).toEqual('d1');
+    expect(mtf.input_cells[2][2]).toEqual('d2');
+    expect(mtf.input_cells[2][3]).toEqual('d3');
+    expect(mtf.input_cells[2][4]).toEqual('d4');
+    expect(mtf.input_cells[2][5]).toEqual('');
+
+
+  });
+
 
 });

@@ -46,7 +46,10 @@ MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
     var current_cols_array = input_line_array[lines_i].split("\|");
 
     for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
-      this.input_cells[lines_i][cols_i] = current_cols_array[cols_i];
+      var cell_data = current_cols_array[cols_i];
+      cell_data = cell_data.replace(/^\s+/g,"");
+      cell_data = cell_data.replace(/\s+$/g,"");
+      this.input_cells[lines_i][cols_i] = cell_data;
     }
   }
 }
