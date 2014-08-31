@@ -1,6 +1,10 @@
 function MarkdownTableFormatter() {
 }
 
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Format Table - format_table(input_table)
 
@@ -36,6 +40,16 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
     }
   }
 };
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Set Column Widths - set_column_widths(input_cells)
+
+MarkdownTableFormatter.prototype.set_column_widths = function(input_cells) {
+
+  this.column_widths = new Array('', 2, 2, 2, '');
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
