@@ -157,13 +157,22 @@ describe("MarkdownTableFormatter", function() {
 
       input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''] ];
       column_widths = [0, 2, 2, 2, 0];
-
       output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''] ];
       
       mtf.set_output_cells(input_cells, column_widths);
 
       expect(mtf.output_cells).toEqual(output_cells);
 
+    });
+
+    it("should properly expand a full set of basic data cells", function() {
+      input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
+      column_widths = [0, 2, 2, 2, 0];
+      output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''], ['', ' d1 ', ' d2 ', ' d3 ', ''] ];
+      
+      mtf.set_output_cells(input_cells, column_widths);
+      
+      expect(mtf.output_cells).toEqual(output_cells);
     });
 
   });
