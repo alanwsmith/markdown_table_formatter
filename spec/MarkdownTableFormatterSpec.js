@@ -35,13 +35,21 @@ describe("MarkdownTableFormatter", function() {
     input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
     
     mtf.set_input_cells(input_table);
-    expect(mtf.input_cells[0][0]).toEqual('h1_c');
-    expect(mtf.input_cells[0][1]).toEqual('h2_c');
-    expect(mtf.input_cells[1][0]).toEqual('-');
-    expect(mtf.input_cells[1][1]).toEqual('-');
-    expect(mtf.input_cells[2][0]).toEqual('d1_c');
-    expect(mtf.input_cells[2][1]).toEqual('d2_c');
+    expect(mtf.input_cells[0][0]).toEqual('');
+    expect(mtf.input_cells[0][1]).toEqual('h1_c');
+    expect(mtf.input_cells[0][2]).toEqual('h2_c');
+    expect(mtf.input_cells[0][3]).toEqual('');
 
+    expect(mtf.input_cells[1][0]).toEqual('');
+    expect(mtf.input_cells[1][1]).toEqual('-');
+    expect(mtf.input_cells[1][2]).toEqual('-');
+    expect(mtf.input_cells[1][3]).toEqual('');
+
+    expect(mtf.input_cells[2][0]).toEqual('');
+    expect(mtf.input_cells[2][1]).toEqual('d1_c');
+    expect(mtf.input_cells[2][2]).toEqual('d2_c');
+    expect(mtf.input_cells[2][3]).toEqual('');
+    
   });
 
 });

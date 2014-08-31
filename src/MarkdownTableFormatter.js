@@ -28,9 +28,17 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
 
 MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
   this.input_cells = new Array();
-  this.input_cells[0] = new Array('h1_c', 'h2_c');
-  this.input_cells[1] = new Array('-', '-');
-  this.input_cells[2] = new Array('d1_c', 'd2_c');
+
+  var input_line_array = input_table.split("\n");
+
+  for (var lines_i = 0, lines_l = input_line_array.length; lines_i < lines_l; lines_i = lines_i + 1) {
+    this.input_cells[lines_i] = new Array();
+    var current_cols_array = input_line_array[lines_i].split("\|");
+
+    for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
+      this.input_cells[lines_i][cols_i] = current_cols_array[cols_i];
+    }
+  }
 }
 
 MarkdownTableFormatter.prototype.set_intput_lines = function(input_table) {
