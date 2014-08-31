@@ -15,21 +15,23 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
   
     // Loop through the items in each column
     for (var cols_i = 0, cols_l = cols.length; cols_i < cols_l; cols_i = cols_i + 1) {
-
-      console.log("String: " + cols[cols_i] + " Length: " + cols[cols_i].length + " Was: " + this.column_widths[cols_i]);
       if (typeof this.column_widths[cols_i] === 'undefined') {
         this.column_widths[cols_i] = cols[cols_i].length;
       }
-
-      if (this.column_widths[cols_i] < cols[cols_i].length) {
+      else if (this.column_widths[cols_i] < cols[cols_i].length) {
         this.column_widths[cols_i] = cols[cols_i].length;
       }
     }
-  }  
-
-
-
+  }
 };
+
+
+MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
+  this.input_cells = new Array();
+  this.input_cells[0] = new Array('h1_c', 'h2_c');
+  this.input_cells[1] = new Array('-', '-');
+  this.input_cells[2] = new Array('d1_c', 'd2_c');
+}
 
 MarkdownTableFormatter.prototype.set_intput_lines = function(input_table) {
   this.input_lines = input_table.split("\n");
