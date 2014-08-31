@@ -7,17 +7,6 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
   this.input_table = input_table;
   this.set_input_cells(input_table);
   this.set_column_widths(this.input_cells);
-
-  // var return_table = "";
-
-  // for (var row_i = 0, row_l = this.input_cells.length; row_i < row_l; row_i = row_i + 1) {
-  //   return_table += "|";
-  //   for (var col_i = 1, col_l = this.input_cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
-
-  //   }
-  //   return_table += "|\n";
-  // }
-
   return input_table;
 };
 
@@ -69,6 +58,8 @@ MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
 }
 
 
+////////////////////////////////////////////////////////////////////////////////
+
 MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, column_widths) {
 
   this.output_cells = new Array();
@@ -76,22 +67,19 @@ MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, colum
   for (var row_i = 0, row_l = input_cells.length; row_i < row_l; row_i = row_i + 1) {
     this.output_cells[row_i] = new Array();
 
-    // TODO: Avoid hard-coding the separator in the second row.
-
     for (var col_i = 0, col_l = input_cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
 
       var output_cell = ""; // Create an empty string to start with;
 
       if (col_i > 0 && col_i < (col_l - 1)) {
 
-        // Hard coding the separator row to the second row.
+        // TODO: Stop hard-coding the separator in the second row.
         if (row_i == 1) {
           var dash_count = column_widths[col_i] + 2;
           while (dash_count > 0) {
             output_cell += '-';
             dash_count = dash_count - 1;
           }
-
         }
         else {
           output_cell += " "; // Start with a space for header and data cells.
@@ -99,9 +87,7 @@ MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, colum
           output_cell += " "; // Add the last space.
         }
       }
-      // input_cells[row_i][col_i];
       this.output_cells[row_i][col_i] = output_cell; 
     }
   }
-
 }
