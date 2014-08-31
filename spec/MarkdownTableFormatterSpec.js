@@ -4,6 +4,7 @@ describe("MarkdownTableFormatter", function() {
   var output_table;
   var input_cells;
   var column_widths;
+  var output_cells;
 
   // TODO: Add test where the first data cell is the longest cell.
   // TODO: Check to make sure array lengths are accurate for hand built tests.
@@ -16,6 +17,7 @@ describe("MarkdownTableFormatter", function() {
     output_table = "";
     input_cells = new Array();
     column_widths = new Array();
+    output_cells = new Array();
   });
 
   it("should not alter an already formatted table", function() {
@@ -130,9 +132,20 @@ describe("MarkdownTableFormatter", function() {
     expect(mtf.output_cells).toBeDefined();
     expect(mtf.output_cells).toEqual([ ['', ' h1 ', ' h2 ', ' h3 ', ''] ]);
 
-
   });
 
+  it("should properly expand separator output_cells", function() {
+
+    input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''] ];
+    column_widths = [0, 2, 2, 2, 0];
+
+    output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''] ];
+    
+    mtf.set_output_cells(input_cells, column_widths);
+
+    expect(mtf.output_cells).toEqual(output_cells);
+
+  });
 
   // // TODO: Use this test when the return columns are set properly.
   // it("should update a standard table properly", function() {

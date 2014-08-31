@@ -83,9 +83,21 @@ MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, colum
       var output_cell = ""; // Create an empty string to start with;
 
       if (col_i > 0 && col_i < (col_l - 1)) {
-        output_cell += " "; // Start with a space for header and data cells.
-        output_cell += input_cells[row_i][col_i];
-        output_cell += " "; // Add the last space.
+
+        // Hard coding the separator row to the second row.
+        if (row_i == 1) {
+          var dash_count = column_widths[col_i] + 2;
+          while (dash_count > 0) {
+            output_cell += '-';
+            dash_count = dash_count - 1;
+          }
+
+        }
+        else {
+          output_cell += " "; // Start with a space for header and data cells.
+          output_cell += input_cells[row_i][col_i];
+          output_cell += " "; // Add the last space.
+        }
       }
       // input_cells[row_i][col_i];
       this.output_cells[row_i][col_i] = output_cell; 
