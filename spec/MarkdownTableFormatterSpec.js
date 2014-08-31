@@ -4,11 +4,9 @@ describe("MarkdownTableFormatter", function() {
   var output_table;
   var input_cells;
 
-
-  // TODO: Add test where the header is the longest cell.
   // TODO: Add test where the first data cell is the longest cell.
   // TODO: Add test where a cell in the last row is the longest cell.
-  
+
   beforeEach(function() {
     mtf = new MarkdownTableFormatter();
     input_table = "";
@@ -35,13 +33,17 @@ describe("MarkdownTableFormatter", function() {
     expect(mtf.column_widths[4]).toBe(0);
   });
 
-  it("should properly identify a second set of target column widths when source has no padding", function() {
-    // TODO: Refactor this to use the set_column_widths() method directly.
-    input_table = "|h1_b|h2_b|h3_b|\n|-|-|-|\n|d1_b|d2_b|d3_b|";
-    mtf.format_table(input_table);
-    expect(mtf.column_widths[1]).toBe(4);
-    expect(mtf.column_widths[2]).toBe(4);
-    expect(mtf.column_widths[3]).toBe(4);
+  it("should properly identify column widths when the header is longer than the cells", function() {
+
+    input_cells = [ ['', 'header_long', 'header', ''], ['', '-', '-', ''], ['', 'd1', 'd2', ''] ];
+
+    mtf.set_column_widths(input_cells);
+
+    expect(mtf.column_widths[0]).toBe(0);
+    expect(mtf.column_widths[1]).toBe(11);
+    expect(mtf.column_widths[2]).toBe(6);
+    expect(mtf.column_widths[3]).toBe(0);
+    
   });
 
 

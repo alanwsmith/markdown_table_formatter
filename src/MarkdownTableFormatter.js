@@ -52,18 +52,10 @@ MarkdownTableFormatter.prototype.set_column_widths = function(input_cells) {
 
   for (var row_i = 0, row_l = input_cells.length; row_i < row_l; row_i = row_i + 1) {
     for (var col_i = 0, col_l = input_cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
-      this.column_widths[col_i] = input_cells[row_i][col_i].length;
+      if (typeof this.column_widths[col_i] === 'undefined') {
+        this.column_widths[col_i] = input_cells[row_i][col_i].length;
+      }
     }
-
-    // Loop through the items in each column
-    // for (var cols_i = 0, cols_l = cols.length; cols_i < cols_l; cols_i = cols_i + 1) {
-    //   if (typeof this.column_widths[cols_i] === 'undefined') {
-    //     this.column_widths[cols_i] = cols[cols_i].length;
-    //   }
-    //   else if (this.column_widths[cols_i] < cols[cols_i].length) {
-    //     this.column_widths[cols_i] = cols[cols_i].length;
-    //   }
-    // }
   }
 }
 
