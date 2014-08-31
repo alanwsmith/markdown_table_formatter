@@ -1,4 +1,7 @@
-markdown_table_formatter
+Markdown Table Formatter
 ========================
 
-A javascript form to format markdown tables for easier reading.
+A JavaScript tool to format markdown tables for easier reading.
+
+*Currently a work in progress*
+
