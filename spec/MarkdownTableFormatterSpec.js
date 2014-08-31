@@ -47,6 +47,18 @@ describe("MarkdownTableFormatter", function() {
     
   });
 
+  it("should properly set column widths when a cell in the last row is the longest", function() {
+
+    input_cells = [ ['', 'h1', 'h2', ''], ['', '-', '-', ''], ['', 'data_cell', 'long_data_cell', ''] ];
+
+    mtf.set_column_widths(input_cells);
+
+    expect(mtf.column_widths[0]).toBe(0);
+    expect(mtf.column_widths[1]).toBe(9);
+    expect(mtf.column_widths[2]).toBe(14);
+    expect(mtf.column_widths[3]).toBe(0);
+  });
+
 
 
   it("should properly create the array of arrays for all table cells", function() {

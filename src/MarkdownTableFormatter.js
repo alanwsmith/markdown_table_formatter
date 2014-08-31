@@ -47,6 +47,9 @@ MarkdownTableFormatter.prototype.set_column_widths = function(input_cells) {
       if (typeof this.column_widths[col_i] === 'undefined') {
         this.column_widths[col_i] = input_cells[row_i][col_i].length;
       }
+      else if (this.column_widths[col_i] < input_cells[row_i][col_i].length) {
+        this.column_widths[col_i] = input_cells[row_i][col_i].length;
+      }
     }
   }
 }
