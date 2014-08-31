@@ -44,8 +44,14 @@ MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
 
     for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
       var cell_data = current_cols_array[cols_i];
+
+      // chomp leading and trailing space
       cell_data = cell_data.replace(/^\s+/g,"");
       cell_data = cell_data.replace(/\s+$/g,"");
+
+      // reduce separator dashes to one so they don't throw off width calculation
+      cell_data = cell_data.replace(/^\-+$/,"-");
+
       this.input_cells[lines_i][cols_i] = cell_data;
     }
   }

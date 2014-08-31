@@ -59,7 +59,6 @@ describe("MarkdownTableFormatter", function() {
   });
 
 
-
   it("should properly create the array of arrays for all table cells", function() {
     input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
     
@@ -102,8 +101,20 @@ describe("MarkdownTableFormatter", function() {
     expect(mtf.input_cells[2][4]).toEqual('d4');
     expect(mtf.input_cells[2][5]).toEqual('');
 
-
   });
+
+  it("should chop down separator to a single one to prevent throwing off widths", function() {
+    
+    input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
+
+    mtf.set_input_cells(input_table);
+
+    expect(mtf.input_cells[1][0]).toEqual('');
+    expect(mtf.input_cells[1][1]).toEqual('-');
+    expect(mtf.input_cells[1][2]).toEqual('-');
+    expect(mtf.input_cells[1][3]).toEqual('');
+
+  });  
 
 
 });
