@@ -4,6 +4,11 @@ describe("MarkdownTableFormatter", function() {
   var output_table;
   var input_cells;
 
+
+  // TODO: Add test where the header is the longest cell.
+  // TODO: Add test where the first data cell is the longest cell.
+  // TODO: Add test where a cell in the last row is the longest cell.
+  
   beforeEach(function() {
     mtf = new MarkdownTableFormatter();
     input_table = "";
