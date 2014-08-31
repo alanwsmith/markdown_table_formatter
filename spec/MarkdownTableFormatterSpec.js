@@ -6,6 +6,7 @@ describe("MarkdownTableFormatter", function() {
 
   // TODO: Add test where the first data cell is the longest cell.
   // TODO: Add test where a cell in the last row is the longest cell.
+  // TODO: Check to make sure array lengths are accurate for hand built tests.
 
   beforeEach(function() {
     mtf = new MarkdownTableFormatter();
