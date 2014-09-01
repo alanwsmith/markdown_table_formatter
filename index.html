@@ -5,12 +5,9 @@
   <script type="text/javascript" src="src/MarkdownTableFormatter.js"></script>
   <script>
 function format_table() {
-  var input_textarea = document.getElementById('input_textarea');
-  var output_textarea = document.getElementById('output_textarea');
-
+  var md_table_holder = document.getElementById('md_table_holder');
   var mtf = new MarkdownTableFormatter();
-
-  output_textarea.innerText = mtf.format_table(input_textarea.value);
+  md_table_holder.innerText = mtf.format_table(md_table_holder.value);
 }
   </script>
   <style type="text/css">
@@ -24,13 +21,11 @@ textarea { font-family: monospace; font-size: 14px; }
   <p>Only the most basic, well-formed tables are currently processed correctly. Your Mileage May Vary.</p>
   <p>To see what it's all about, click the &quot;Format Table&quot; with the example table, or format your own.</p>
   <form>  
-    <textarea id="input_textarea" cols="70" rows="6">| Header 1 | Header 2 | Header 3 |
+    <textarea id="md_table_holder" cols="70" rows="6">| Header 1 | Header 2 | Header 3 |
 |-|-|-|
 | data1a | data2a_longer_than_header | 1 |
 | d1b | d2b |2|
 |some more data|true|3|</textarea>
-    <br>
-    <textarea id="output_textarea" cols="70" rows="6"></textarea>
     <br>
     <input type="button" value="Format Table" onclick="format_table();"></input>
   </form>
