@@ -2,11 +2,48 @@
 <html lang="en">
 <head>
   <title>Markdown Table Formatter</title>
+  <script type="text/javascript" src="src/MarkdownTableFormatter.js"></script>
+  <script>
+function format_table() {
+  var input_textarea = document.getElementById('input_textarea');
+  var output_textarea = document.getElementById('output_textarea');
+
+  var mtf = new MarkdownTableFormatter();
+
+  output_textarea.innerText = mtf.format_table(input_textarea.value);
+}
+  </script>
+  <style type="text/css">
+textarea { font-family: monospace; font-size: 14px; }
+.footer { font-size: 13px; }
+  </style>
 </head>
 <body>
   <h1>Markdown Table Formatter</h1>
-  <p>A work in progress</p>
-  <p><a href="test_run.html">Run Test Suite</a></p>
-  <p><a href="https://github.com/alanwsmith/markdown_table_formatter">View GitHub project</a></p>
+  <p>This tool is a very early stage work in progress. When finished it will &quot;Pretty Print&quot; MultiMarkdown style tables.</p>
+  <p>Only the most basic, well-formed tables are currently processed correctly. Your Mileage May Vary.</p>
+  <p>To see what it's all about, click the &quot;Format Table&quot; with the example table, or format your own.</p>
+  <form>  
+    <textarea id="input_textarea" cols="70" rows="6">| Header 1 | Header 2 | Header 3 |
+|-|-|-|
+| data1a | data2a_longer_than_header | 1 |
+| d1b | d2b |2|
+|some more data|true|3|</textarea>
+    <br>
+    <textarea id="output_textarea" cols="70" rows="6"></textarea>
+    <br>
+    <input type="button" value="Format Table" onclick="format_table();"></input>
+  </form>
+  
+<hr>  
+
+<p class="footer">
+  For more info:<br> 
+  I'm on Twitter as <a href="https://twitter.com/TheIdOfAlan">@TheIdOfAlan</a><br>
+  I sometimes post on my personal site <a href="http://alanwsmith.com/">alanwsmith.com</a><br>
+  This is an Open Source <a href="https://github.com/alanwsmith/markdown_table_formatter">GitHub Project</a>.<br>
+  It has a <a href="test_run.html">Jasmine Test Suite</a> you can run.
+</p>
+
 </body>
 </html>
