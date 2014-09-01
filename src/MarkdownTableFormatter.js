@@ -84,8 +84,14 @@ MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, colum
           }
         }
         else {
+          var post_string_padding_to_apply = column_widths[col_i] - input_cells[row_i][col_i].length;
+          
           output_cell += " "; // Start with a space for header and data cells.
           output_cell += input_cells[row_i][col_i];
+          while(post_string_padding_to_apply > 0) {
+            output_cell += " ";
+            post_string_padding_to_apply = post_string_padding_to_apply - 1;
+          }
           output_cell += " "; // Add the last space.
         }
       }

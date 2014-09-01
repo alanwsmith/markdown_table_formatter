@@ -174,6 +174,18 @@ describe("MarkdownTableFormatter", function() {
       mtf.set_output_cells(input_cells, column_widths);
       
       expect(mtf.output_cells).toEqual(output_cells);
+
+    });
+
+    it("should properly expand data cells based on header length", function() {
+      input_cells = [ ['', 'h1_long', 'h2_longer', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
+      column_widths = [0, 7, 9, 2, 0];
+      output_cells = [ ['', ' h1_long ', ' h2_longer ', ' h3 ', ''], ['', '---------', '-----------', '----', ''], ['', ' d1      ', ' d2        ', ' d3 ', ''] ];
+
+      mtf.set_output_cells(input_cells, column_widths);
+
+      expect(mtf.output_cells).toEqual(output_cells);
+
     });
 
   });
