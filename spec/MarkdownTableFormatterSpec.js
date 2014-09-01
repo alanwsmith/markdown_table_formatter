@@ -203,9 +203,13 @@ describe("MarkdownTableFormatter", function() {
 
   describe("Test full table builds", function() {
 
+    // Note that the tool puts a newline after the last row. This is 
+    // desired, but can catch you off guard if you don't notice and 
+    // add it when writing test comparisons.
+
     it("should not alter an already formatted table", function() {
       input_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |";
-      output_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |";
+      output_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |\n";
       expect(mtf.format_table(input_table)).toEqual(output_table);
     });
 

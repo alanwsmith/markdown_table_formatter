@@ -7,7 +7,9 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
   this.input_table = input_table;
   this.set_input_cells(input_table);
   this.set_column_widths(this.input_cells);
-  return input_table;
+  this.set_output_cells(this.input_cells, this.column_widths);
+  this.set_output_table(this.output_cells);
+  return this.output_table;
 };
 
 
