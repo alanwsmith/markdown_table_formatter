@@ -91,3 +91,16 @@ MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, colum
     }
   }
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.set_output_table = function (output_cells) {
+
+  this.output_table = "";
+
+  for (var row_i = 0, row_l = output_cells.length; row_i < row_l; row_i = row_i + 1) {
+    this.output_table += output_cells[row_i].join('|') + "\n";
+  }
+}
+

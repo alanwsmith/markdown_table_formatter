@@ -179,6 +179,26 @@ describe("MarkdownTableFormatter", function() {
 
   });
 
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("Test output_table", function() {
+
+    it("should properly build a basic table", function() {
+
+      output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''], ['', ' d1 ', ' d2 ', ' d3 ', ''] ];
+
+      output_table = "";
+      output_table += "| h1 | h2 | h3 |\n";
+      output_table += "|----|----|----|\n";
+      output_table += "| d1 | d2 | d3 |\n";
+
+      mtf.set_output_table(output_cells)
+
+      expect(mtf.output_table).toEqual(output_table);
+    });
+
+  });
+
 
   ////////////////////////////////////////////////////////////////////////////////
 
