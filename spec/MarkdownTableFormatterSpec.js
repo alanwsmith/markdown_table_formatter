@@ -28,8 +28,7 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("Test input_table", function() {
-
+  describe("set_input_cells", function() {
 
     it("should properly create the array of arrays for all table cells", function() {
       input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
@@ -96,7 +95,7 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("Test input_cells", function() {
+  describe("set_column_widths", function() {
 
     it("should properly identify target column widths when source has no padding", function() {
       
@@ -141,7 +140,7 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("Test output_cells", function() {
+  describe("set_output_cells", function() {
 
     it("should properly pad header output_cells", function() {
 
@@ -181,7 +180,7 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("Test output_table", function() {
+  describe("set_output_table", function() {
 
     it("should properly build a basic table", function() {
 
