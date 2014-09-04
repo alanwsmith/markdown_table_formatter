@@ -3,7 +3,9 @@ describe("MarkdownTableFormatter", function() {
   // TODO: Add test where the first data cell is the longest cell.
   // TODO: Add test with some rows not having all cells.
   // TODO: Add test where there are more body columns than header columns.
-
+  // TODO: Right justify numbers
+  // TODO: Deal with lines that don't have a starting "|"
+  // TODO: Deal with lines that don't have an ending "|"
 
   var mtf;
   var column_widths;
