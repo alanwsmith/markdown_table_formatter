@@ -5,8 +5,10 @@ function MarkdownTableFormatter() {
 
 MarkdownTableFormatter.prototype.initialize = function(input_table) {
 
+  // Setup instance variables.
   this.column_widths = new Array();
   this.input_cells = new Array();
+  this.input_table = "";
   this.output_cells = new Array();
   this.output_table = "";
 
