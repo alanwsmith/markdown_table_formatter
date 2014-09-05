@@ -18,6 +18,7 @@ describe("MarkdownTableFormatter", function() {
   beforeEach(function() {
     
     mtf = new MarkdownTableFormatter();
+    mtf.initialize();
     
     column_widths = new Array();
     input_cells = new Array();
@@ -91,6 +92,7 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.input_cells[1][3]).toEqual('');
 
     });  
+
 
   });
 
@@ -189,6 +191,30 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.output_cells).toEqual(output_cells);
 
     });
+
+    // it("should fill in missing data cells", function() {
+    //   output_cells_original = [ 
+    //     ['', ' h1 ', ' h2 ', ' h3 ', ''], 
+    //     ['', '----', '----', '----', ''], 
+    //     ['', ' d1 ', ' d2 ', '', '']
+    //   ];
+      
+    //   column_widths = [0, 2, 2, 2, 0];
+      
+    //   output_cells_updated = [ 
+    //     ['', ' h1 ', ' h2 ', ' h3 ', ''], 
+    //     ['', '----', '----', '----', ''], 
+    //     ['', ' d1 ', ' d2 ', '', '']
+    //   ];
+
+
+
+
+    //   mtf.pad_missing_output_cells(output_cells_original, column_widths);
+
+    //   expect(mtf.output_cells).toEqual(output_cells_updated);
+
+    // });
 
   });
 
