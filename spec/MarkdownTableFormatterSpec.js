@@ -104,40 +104,41 @@ describe("MarkdownTableFormatter", function() {
 
     it("should properly identify target column widths when source has no padding", function() {
       
+      // GIVEN
       input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
 
+      // WHEN
       mtf.set_column_widths(input_cells);
 
-      expect(mtf.column_widths[0]).toBe(0);
-      expect(mtf.column_widths[1]).toBe(2);
-      expect(mtf.column_widths[2]).toBe(2);
-      expect(mtf.column_widths[3]).toBe(2);
-      expect(mtf.column_widths[4]).toBe(0);
+      // THEN
+      expect(mtf.column_widths).toEqual([0, 2, 2, 2, 0]);
+      
     });
 
     it("should properly identify column widths when the header is longer than the cells", function() {
 
+      // GIVEN
       input_cells = [ ['', 'header_long', 'header', ''], ['', '-', '-', ''], ['', 'd1', 'd2', ''] ];
 
+      // WHEN
       mtf.set_column_widths(input_cells);
 
-      expect(mtf.column_widths[0]).toBe(0);
-      expect(mtf.column_widths[1]).toBe(11);
-      expect(mtf.column_widths[2]).toBe(6);
-      expect(mtf.column_widths[3]).toBe(0);
+      // THEN
+      expect(mtf.column_widths).toEqual([0, 11, 6, 0 ]);
       
     });
 
     it("should properly set column widths when a cell in the last row is the longest", function() {
 
+      // GIVEN
       input_cells = [ ['', 'h1', 'h2', ''], ['', '-', '-', ''], ['', 'data_cell', 'long_data_cell', ''] ];
 
+      // WHEN
       mtf.set_column_widths(input_cells);
 
-      expect(mtf.column_widths[0]).toBe(0);
-      expect(mtf.column_widths[1]).toBe(9);
-      expect(mtf.column_widths[2]).toBe(14);
-      expect(mtf.column_widths[3]).toBe(0);
+      // THEN
+      expect(mtf.column_widths).toEqual([0, 9, 14, 0]);
+      
     });
 
   });
