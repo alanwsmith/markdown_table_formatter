@@ -17,7 +17,6 @@ describe("MarkdownTableFormatter", function() {
   beforeEach(function() {
     
     mtf = new MarkdownTableFormatter();
-    mtf.initialize();
     
     column_widths = new Array();
     input_cells = new Array();
@@ -26,6 +25,25 @@ describe("MarkdownTableFormatter", function() {
     output_table = "";
 
   });
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("initialization", function() {
+
+    it("should properly initialize the instance variables", function() {
+
+      // GIVEN
+      mtf = new MarkdownTableFormatter();
+
+      // THEN
+      expect(mtf.column_widths.length).toEqual(0);
+      expect(mtf.input_cells.length).toEqual(0);
+      expect(mtf.output_cells.length).toEqual(0);
+
+    });
+
+  });
+
 
 
   ////////////////////////////////////////////////////////////////////////////////

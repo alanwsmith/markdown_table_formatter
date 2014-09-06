@@ -1,9 +1,4 @@
 function MarkdownTableFormatter() {
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-MarkdownTableFormatter.prototype.initialize = function() {
 
   // Setup instance variables.
   this.column_widths = new Array();
