@@ -23,7 +23,11 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
   this.set_input_cells(input_table);
   this.set_column_widths(this.input_cells);
   this.set_output_cells(this.input_cells, this.column_widths);
-  // this.pad_missing_output_cells();
+  this.pad_missing_output_cells();
+
+  // Gotta call this with itself to add spacing into cells that were empty.
+  // this.set_output_cells(this.output_cells, this.column_widths);
+
   this.set_output_table(this.output_cells);
   return this.output_table;
 };
@@ -32,15 +36,16 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// MarkdownTableFormatter.prototype.pad_missing_output_cells = function() {
-//   for (var row_i = 0, row_l = this.output_cells.length - 1; row_i < row_l; row_i = row_i + 1) {
-//     for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
-//       if (typeof this.output_cells[row_i][col_i] === 'undefined') {
-//         this.output_cells[row_i][col_i] = '';
-//       }
-//     }
-//   }  
-// }
+MarkdownTableFormatter.prototype.pad_missing_output_cells = function() {
+  for (var row_i = 0, row_l = this.output_cells.length; row_i < row_l; row_i = row_i + 1) {
+    for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
+      if (typeof this.output_cells[row_i][col_i] === 'undefined') {
+        this.output_cells[row_i][col_i] = '';
+      }
+    }
+  }  
+}
+
 
 
 
