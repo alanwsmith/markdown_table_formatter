@@ -15,7 +15,6 @@ describe("MarkdownTableFormatter", function() {
   var output_table;
 
   
-
   beforeEach(function() {
     
     mtf = new MarkdownTableFormatter();
@@ -52,11 +51,17 @@ describe("MarkdownTableFormatter", function() {
 
   // describe("calculate_column_widths", function() {
 
-  //   it("should properly initialize the instance variables", function() {
+  //   it("should set basic column widths properly", function() {
 
   //     // GIVEN
-  //     mtf.body_cells = 
+  //     mtf.header_cells = [['', 'h1', 'h2', '']];
+  //     mtf.body_cells = [['', 'd1', 'd2', '']];
 
+  //     // WHEN
+  //     mtf.calculate_column_widths();
+
+  //     // THEN
+  //     expect(mtf.column_widths).toEqual([0,2,2,0]);
 
   //   });
 

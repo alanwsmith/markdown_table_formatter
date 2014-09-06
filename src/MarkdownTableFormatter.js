@@ -24,6 +24,17 @@ MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+// MarkdownTableFormatter.prototype.calculate_column_widths = function() {
+
+  
+// }
+
+
+
 ////////////////////////////////////////////////////////////////////////////////
 
 MarkdownTableFormatter.prototype.format_table = function(input_table) {
