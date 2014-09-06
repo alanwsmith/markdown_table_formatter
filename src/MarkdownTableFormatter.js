@@ -1,6 +1,7 @@
 function MarkdownTableFormatter() {
 
   // Setup instance variables.
+  this.body_cells = new Array();
   this.column_widths = new Array();
   this.header_cells = new Array();
   this.input_cells = new Array();
@@ -33,6 +34,24 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
   this.set_output_table(this.output_cells);
   return this.output_table;
 };
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.load_body_cells = function() {
+
+  var body_array = this.source_table.split("\n");
+
+  for (var line_index = 2, line_count = body_array.length; line_index < line_count; line_index = line_index + 1) {
+
+    // subtract two to adjust for data array
+    this.body_cells[line_index - 2] = body_array[line_index].split("\|");
+    this.body_cells[line_index - 2].shift();
+    this.body_cells[line_index - 2].pop();
+
+  }
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////

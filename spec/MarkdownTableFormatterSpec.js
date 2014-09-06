@@ -49,6 +49,27 @@ describe("MarkdownTableFormatter", function() {
 
 
 
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("load_body_cells", function() {
+
+    it("should properly load basic data cells", function() {
+
+      // GIVEN
+      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
+
+      // WHEN
+      mtf.load_body_cells();
+
+      // THEN
+      expect(mtf.body_cells).toEqual([['d1', 'd2']]);
+
+    });
+
+  });
+
+
   ////////////////////////////////////////////////////////////////////////////////
 
   describe("load_header_cells", function() {
