@@ -40,13 +40,9 @@ MarkdownTableFormatter.prototype.format_table = function(input_table) {
 MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
   for (var row_i = 0, row_l = this.input_cells.length; row_i < row_l; row_i = row_i + 1) {    
     for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
-
-      console.log("Padding for row: " + row_i + " " + col_i);
-
       if (typeof this.input_cells[row_i][col_i] === 'undefined') {
         this.input_cells[row_i][col_i] = '';
-      }
-      
+      }      
     }
   }  
 }
