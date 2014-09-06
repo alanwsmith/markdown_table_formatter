@@ -49,10 +49,13 @@ MarkdownTableFormatter.prototype.load_body_cells = function() {
 
   for (var line_index = 0, line_count = body_array.length; line_index < line_count; line_index = line_index + 1) {
 
+    // Skip lines that don't have a pipe
+    if(body_array[line_index].indexOf('|') == -1) {
+      continue;
+    }
+
     // subtract two to adjust for data array
     this.body_cells[line_index] = body_array[line_index].split("\|");
-
-    console.log(this.body_cells[line_index].length);    
 
     for (var cell_index = 0, cell_count = this.body_cells[line_index].length; cell_index < cell_count; cell_index = cell_index + 1) {
       this.body_cells[line_index][cell_index] = this.body_cells[line_index][cell_index].replace(/^\s+/g,"");

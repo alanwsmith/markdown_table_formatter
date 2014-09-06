@@ -80,18 +80,18 @@ describe("MarkdownTableFormatter", function() {
     });
 
 
-    // it("should skip lines with just white space", function() {
+    it("should skip lines with just white space", function() {
 
-    //   // GIVEN
-    //   mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n\n\n\n";
+      // GIVEN
+      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n\n\n\n";
 
-    //   // WHEN
-    //   mtf.load_body_cells();
+      // WHEN
+      mtf.load_body_cells();
 
-    //   // THEN
-    //   expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
+      // THEN
+      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
 
-    // });
+    });
 
   });
 
