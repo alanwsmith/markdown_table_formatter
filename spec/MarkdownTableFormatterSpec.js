@@ -67,6 +67,7 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+
     it("should should strip white space from data cells", function() {
       // GIVEN
       mtf.source_table = "|h1|h2|\n|-|-|\n| d1 |   d2    |";
@@ -77,6 +78,20 @@ describe("MarkdownTableFormatter", function() {
       // THEN
       expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);      
     });
+
+
+    // it("should skip lines with just white space", function() {
+
+    //   // GIVEN
+    //   mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n\n\n\n";
+
+    //   // WHEN
+    //   mtf.load_body_cells();
+
+    //   // THEN
+    //   expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
+
+    // });
 
   });
 

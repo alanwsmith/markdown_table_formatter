@@ -43,14 +43,20 @@ MarkdownTableFormatter.prototype.load_body_cells = function() {
 
   var body_array = this.source_table.split("\n");
 
-  for (var line_index = 2, line_count = body_array.length; line_index < line_count; line_index = line_index + 1) {
+  // shift two off the front to get to the actual data
+  body_array.shift();
+  body_array.shift();  
+
+  for (var line_index = 0, line_count = body_array.length; line_index < line_count; line_index = line_index + 1) {
 
     // subtract two to adjust for data array
-    this.body_cells[line_index - 2] = body_array[line_index].split("\|");
+    this.body_cells[line_index] = body_array[line_index].split("\|");
 
-    for (var cell_index = 0, cell_count = this.body_cells[line_index - 2].length; cell_index < cell_count; cell_index = cell_index + 1) {
-      this.body_cells[line_index - 2][cell_index] = this.body_cells[line_index - 2][cell_index].replace(/^\s+/g,"");
-      this.body_cells[line_index - 2][cell_index] = this.body_cells[line_index - 2][cell_index].replace(/\s+$/g,"");
+    console.log(this.body_cells[line_index].length);    
+
+    for (var cell_index = 0, cell_count = this.body_cells[line_index].length; cell_index < cell_count; cell_index = cell_index + 1) {
+      this.body_cells[line_index][cell_index] = this.body_cells[line_index][cell_index].replace(/^\s+/g,"");
+      this.body_cells[line_index][cell_index] = this.body_cells[line_index][cell_index].replace(/\s+$/g,"");
     }
   }
 }
