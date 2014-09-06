@@ -213,24 +213,24 @@ describe("MarkdownTableFormatter", function() {
 
       // GIVEN
 
-      mtf.output_cells = [ 
-        ['', ' h1 ', ' h2 ', ' h3 ', ''], 
-        ['', '----', '----', '----', ''], 
-        ['', ' d1 ', ' d2 ', '']
+      mtf.input_cells = [ 
+        ['', 'h1', 'h2', 'h3', ''], 
+        ['', '--', '--', '--', ''], 
+        ['', 'd1', 'd2', '']
       ];
       
       mtf.column_widths = [0, 2, 2, 2, 0];
       
       // WHEN
 
-      mtf.pad_missing_output_cells();
+      mtf.add_missing_input_cells();
 
       // THEN
 
-      expect(mtf.output_cells).toEqual([ 
-        ['', ' h1 ', ' h2 ', ' h3 ', ''], 
-        ['', '----', '----', '----', ''], 
-        ['', ' d1 ', ' d2 ', '', '']
+      expect(mtf.input_cells).toEqual([ 
+        ['', 'h1', 'h2', 'h3', ''], 
+        ['', '--', '--', '--', ''], 
+        ['', 'd1', 'd2', '', '']
       ]);
 
     });
