@@ -34,62 +34,50 @@ describe("MarkdownTableFormatter", function() {
   describe("set_input_cells", function() {
 
     it("should properly create the array of arrays for all table cells", function() {
+
+      // GIVEN
       mtf.input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
       
+      // WHEN
       mtf.set_input_cells();
+
+      // THEN
       expect(mtf.input_cells[0].length).toEqual(4);
-      expect(mtf.input_cells[0][0]).toEqual('');
-      expect(mtf.input_cells[0][1]).toEqual('h1_c');
-      expect(mtf.input_cells[0][2]).toEqual('h2_c');
-      expect(mtf.input_cells[0][3]).toEqual('');
+      expect(mtf.input_cells[0]).toEqual(['', 'h1_c', 'h2_c', '']);
 
       expect(mtf.input_cells[1].length).toEqual(4);
-      expect(mtf.input_cells[1][0]).toEqual('');
-      expect(mtf.input_cells[1][1]).toEqual('-');
-      expect(mtf.input_cells[1][2]).toEqual('-');
-      expect(mtf.input_cells[1][3]).toEqual('');
-
+      expect(mtf.input_cells[1]).toEqual(['', '-', '-', '']);
+      
       expect(mtf.input_cells[2].length).toEqual(4);
-      expect(mtf.input_cells[2][0]).toEqual('');
-      expect(mtf.input_cells[2][1]).toEqual('d1_c');
-      expect(mtf.input_cells[2][2]).toEqual('d2_c');
-      expect(mtf.input_cells[2][3]).toEqual('');
+      expect(mtf.input_cells[2]).toEqual(['', 'd1_c', 'd2_c', '']);
       
     });
 
 
     it("should properly remove white space when loading the table", function() {
 
+      // GIVEN
       mtf.input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
 
+      // WHEN
       mtf.set_input_cells();
 
-      expect(mtf.input_cells[0][0]).toEqual('');
-      expect(mtf.input_cells[0][1]).toEqual('h1');
-      expect(mtf.input_cells[0][2]).toEqual('h2');
-      expect(mtf.input_cells[0][3]).toEqual('h3');
-      expect(mtf.input_cells[0][4]).toEqual('h4');
-      expect(mtf.input_cells[0][5]).toEqual('');
-
-      expect(mtf.input_cells[2][0]).toEqual('');
-      expect(mtf.input_cells[2][1]).toEqual('d1');
-      expect(mtf.input_cells[2][2]).toEqual('d2');
-      expect(mtf.input_cells[2][3]).toEqual('d3');
-      expect(mtf.input_cells[2][4]).toEqual('d4');
-      expect(mtf.input_cells[2][5]).toEqual('');
-
+      // THEN
+      expect(mtf.input_cells[0]).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
+      expect(mtf.input_cells[2]).toEqual(['', 'd1', 'd2', 'd3', 'd4', '']);
+      
     });
 
     it("should chop down separator to a single one to prevent throwing off widths", function() {
       
+      // GIVEN
       mtf.input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
 
+      // WHEN
       mtf.set_input_cells();
 
-      expect(mtf.input_cells[1][0]).toEqual('');
-      expect(mtf.input_cells[1][1]).toEqual('-');
-      expect(mtf.input_cells[1][2]).toEqual('-');
-      expect(mtf.input_cells[1][3]).toEqual('');
+      // THEN
+      expect(mtf.input_cells[1]).toEqual([ '', '-', '-', '' ]);
 
     });  
 
