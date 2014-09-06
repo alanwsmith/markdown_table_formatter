@@ -7,17 +7,20 @@ describe("MarkdownTableFormatter", function() {
   // TODO: Deal with lines that don't have an ending "|"
 
   var mtf;
+  var cells;
   var column_widths;
   var input_cells;
   var input_table;
   var output_cells;
   var output_table;
+
   
 
   beforeEach(function() {
     
     mtf = new MarkdownTableFormatter();
     
+    cells = new Array();
     column_widths = new Array();
     input_cells = new Array();
     input_table = "";
@@ -48,27 +51,56 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("set_input_cells", function() {
+  describe("load_header_cells", function() {
 
-    it("should properly create the array of arrays for all table cells", function() {
+    it("should load basic header cells", function() {
 
       // GIVEN
-      input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
+      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
       
       // WHEN
-      mtf.set_input_cells(input_table);
+      mtf.load_header_cells();
 
       // THEN
-      expect(mtf.input_cells[0].length).toEqual(4);
-      expect(mtf.input_cells[0]).toEqual(['', 'h1_c', 'h2_c', '']);
-
-      expect(mtf.input_cells[1].length).toEqual(4);
-      expect(mtf.input_cells[1]).toEqual(['', '-', '-', '']);
-      
-      expect(mtf.input_cells[2].length).toEqual(4);
-      expect(mtf.input_cells[2]).toEqual(['', 'd1_c', 'd2_c', '']);
+      expect(mtf.header_cells).toEqual(['', 'h1', 'h2', '']);
       
     });
+
+  });
+
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("set_input_cells", function() {
+
+    // it("should properly create the array of arrays for all table cells", function() {
+
+    //   // GIVEN
+    //   mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
+      
+    //   // WHEN
+    //   mtf.load_header_cells();
+
+    //   // THEN
+    //   expect(mtf.header_cells).toEqual(['', 'h1', 'h2', '']);
+
+
+    //   // THEN
+    //   // expect(mtf.cells).toEqual([ ['h1'], [], []]);
+
+    //   // THEN
+    //   // expect(mtf.input_cells[0].length).toEqual(4);
+    //   // expect(mtf.input_cells[0]).toEqual(['', 'h1_c', 'h2_c', '']);
+
+    //   // expect(mtf.input_cells[1].length).toEqual(4);
+    //   // expect(mtf.input_cells[1]).toEqual(['', '-', '-', '']);
+      
+    //   // expect(mtf.input_cells[2].length).toEqual(4);
+    //   // expect(mtf.input_cells[2]).toEqual(['', 'd1_c', 'd2_c', '']);
+      
+    // });
 
 
     it("should properly remove white space when loading the table", function() {

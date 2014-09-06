@@ -2,9 +2,11 @@ function MarkdownTableFormatter() {
 
   // Setup instance variables.
   this.column_widths = new Array();
+  this.header_cells = new Array();
   this.input_cells = new Array();
   this.output_cells = new Array();
   this.output_table = "";
+  this.source_table = "";
 
 }
 
@@ -36,6 +38,17 @@ MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.load_header_cells = function() {
+
+  // TODO: Make sure the first line really has data and is the header.
+  // TODO: Determine if multiple rows of headers should be dealt with.
+
+  var source_table_lines = this.source_table.split("\n");
+  this.header_cells = source_table_lines[0].split('\|');
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
