@@ -105,10 +105,10 @@ describe("MarkdownTableFormatter", function() {
     it("should properly identify target column widths when source has no padding", function() {
       
       // GIVEN
-      input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
+      mtf.input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
 
       // WHEN
-      mtf.set_column_widths(input_cells);
+      mtf.set_column_widths();
 
       // THEN
       expect(mtf.column_widths).toEqual([0, 2, 2, 2, 0]);
@@ -118,10 +118,10 @@ describe("MarkdownTableFormatter", function() {
     it("should properly identify column widths when the header is longer than the cells", function() {
 
       // GIVEN
-      input_cells = [ ['', 'header_long', 'header', ''], ['', '-', '-', ''], ['', 'd1', 'd2', ''] ];
+      mtf.input_cells = [ ['', 'header_long', 'header', ''], ['', '-', '-', ''], ['', 'd1', 'd2', ''] ];
 
       // WHEN
-      mtf.set_column_widths(input_cells);
+      mtf.set_column_widths();
 
       // THEN
       expect(mtf.column_widths).toEqual([0, 11, 6, 0 ]);
@@ -131,10 +131,10 @@ describe("MarkdownTableFormatter", function() {
     it("should properly set column widths when a cell in the last row is the longest", function() {
 
       // GIVEN
-      input_cells = [ ['', 'h1', 'h2', ''], ['', '-', '-', ''], ['', 'data_cell', 'long_data_cell', ''] ];
+      mtf.input_cells = [ ['', 'h1', 'h2', ''], ['', '-', '-', ''], ['', 'data_cell', 'long_data_cell', ''] ];
 
       // WHEN
-      mtf.set_column_widths(input_cells);
+      mtf.set_column_widths();
 
       // THEN
       expect(mtf.column_widths).toEqual([0, 9, 14, 0]);
