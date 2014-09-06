@@ -48,6 +48,10 @@ MarkdownTableFormatter.prototype.load_body_cells = function() {
     // subtract two to adjust for data array
     this.body_cells[line_index - 2] = body_array[line_index].split("\|");
 
+    for (var cell_index = 0, cell_count = this.body_cells[line_index - 2].length; cell_index < cell_count; cell_index = cell_index + 1) {
+      this.body_cells[line_index - 2][cell_index] = this.body_cells[line_index - 2][cell_index].replace(/^\s+/g,"");
+      this.body_cells[line_index - 2][cell_index] = this.body_cells[line_index - 2][cell_index].replace(/\s+$/g,"");
+    }
   }
 }
 
