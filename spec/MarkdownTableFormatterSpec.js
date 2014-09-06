@@ -34,9 +34,9 @@ describe("MarkdownTableFormatter", function() {
   describe("set_input_cells", function() {
 
     it("should properly create the array of arrays for all table cells", function() {
-      input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
+      mtf.input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
       
-      mtf.set_input_cells(input_table);
+      mtf.set_input_cells();
       expect(mtf.input_cells[0].length).toEqual(4);
       expect(mtf.input_cells[0][0]).toEqual('');
       expect(mtf.input_cells[0][1]).toEqual('h1_c');
@@ -60,9 +60,9 @@ describe("MarkdownTableFormatter", function() {
 
     it("should properly remove white space when loading the table", function() {
 
-      input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
+      mtf.input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
 
-      mtf.set_input_cells(input_table);
+      mtf.set_input_cells();
 
       expect(mtf.input_cells[0][0]).toEqual('');
       expect(mtf.input_cells[0][1]).toEqual('h1');
@@ -82,9 +82,9 @@ describe("MarkdownTableFormatter", function() {
 
     it("should chop down separator to a single one to prevent throwing off widths", function() {
       
-      input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
+      mtf.input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
 
-      mtf.set_input_cells(input_table);
+      mtf.set_input_cells();
 
       expect(mtf.input_cells[1][0]).toEqual('');
       expect(mtf.input_cells[1][1]).toEqual('-');
@@ -97,12 +97,12 @@ describe("MarkdownTableFormatter", function() {
     it("should not add output rows for empty lines", function() {
 
       // GIVEN
-
-      input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
+      mtf.input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
 
       // WHEN 
-      mtf.set_input_cells(input_table);
+      mtf.set_input_cells();
 
+      // THEN
       expect(mtf.input_cells.length).toEqual(3);
 
     });
