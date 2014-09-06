@@ -63,7 +63,7 @@ describe("MarkdownTableFormatter", function() {
       mtf.load_body_cells();
 
       // THEN
-      expect(mtf.body_cells).toEqual([['d1', 'd2']]);
+      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
 
     });
 

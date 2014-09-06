@@ -47,8 +47,6 @@ MarkdownTableFormatter.prototype.load_body_cells = function() {
 
     // subtract two to adjust for data array
     this.body_cells[line_index - 2] = body_array[line_index].split("\|");
-    this.body_cells[line_index - 2].shift();
-    this.body_cells[line_index - 2].pop();
 
   }
 }
