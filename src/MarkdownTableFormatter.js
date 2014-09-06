@@ -8,7 +8,6 @@ MarkdownTableFormatter.prototype.initialize = function() {
   // Setup instance variables.
   this.column_widths = new Array();
   this.input_cells = new Array();
-  this.input_table = "";
   this.output_cells = new Array();
   this.output_table = "";
 
@@ -18,7 +17,6 @@ MarkdownTableFormatter.prototype.initialize = function() {
 ////////////////////////////////////////////////////////////////////////////////
 
 MarkdownTableFormatter.prototype.format_table = function(input_table) {
-  this.input_table = input_table;
   this.set_input_cells(input_table);
   this.set_column_widths();
   this.add_missing_input_cells();
