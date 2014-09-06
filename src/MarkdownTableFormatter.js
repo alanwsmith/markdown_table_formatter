@@ -73,11 +73,18 @@ MarkdownTableFormatter.prototype.load_header_cells = function() {
   // TODO: Determine if multiple rows of headers should be dealt with.
 
   var source_table_lines = this.source_table.split("\n");
-  this.header_cells = source_table_lines[0].split('\|');
 
-  for (var cell_index = 0, cell_count = this.header_cells.length; cell_index < cell_count; cell_index = cell_index + 1) {
-    this.header_cells[cell_index] = this.header_cells[cell_index].replace(/^\s+/g,"");
-    this.header_cells[cell_index] = this.header_cells[cell_index].replace(/\s+$/g,"");
+  this.header_cells = new Array();
+
+  this.header_cells[0] = source_table_lines[0].split('\|');
+
+  // Setup the row.
+  
+
+
+  for (var cell_index = 0, cell_count = this.header_cells[0].length; cell_index < cell_count; cell_index = cell_index + 1) {
+    this.header_cells[0][cell_index] = this.header_cells[0][cell_index].replace(/^\s+/g,"");
+    this.header_cells[0][cell_index] = this.header_cells[0][cell_index].replace(/\s+$/g,"");
   }
 }
 

@@ -48,6 +48,21 @@ describe("MarkdownTableFormatter", function() {
   });
 
 
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // describe("calculate_column_widths", function() {
+
+  //   it("should properly initialize the instance variables", function() {
+
+  //     // GIVEN
+  //     mtf.body_cells = 
+
+
+  //   });
+
+  // });
+
+
 
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -110,6 +125,8 @@ describe("MarkdownTableFormatter", function() {
   });
 
 
+
+
   ////////////////////////////////////////////////////////////////////////////////
 
   describe("load_header_cells", function() {
@@ -123,7 +140,7 @@ describe("MarkdownTableFormatter", function() {
       mtf.load_header_cells();
 
       // THEN
-      expect(mtf.header_cells).toEqual(['', 'h1', 'h2', '']);
+      expect(mtf.header_cells).toEqual([['', 'h1', 'h2', '']]);
       
     });
 
@@ -136,7 +153,7 @@ describe("MarkdownTableFormatter", function() {
       mtf.load_header_cells();
 
       // THEN
-      expect(mtf.header_cells).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
+      expect(mtf.header_cells).toEqual([['', 'h1', 'h2', 'h3', 'h4', '']]);
       
     });
 
