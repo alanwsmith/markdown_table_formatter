@@ -86,6 +86,7 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
+  // TODO: Remove this when the load_header_cells and load_body_cells replaces set_input_cells
   describe("set_input_cells", function() {
 
     // it("should properly create the array of arrays for all table cells", function() {
@@ -116,19 +117,19 @@ describe("MarkdownTableFormatter", function() {
     // });
 
 
-    it("should properly remove white space when loading the table", function() {
+    // it("should properly remove white space when loading the table", function() {
 
-      // GIVEN
-      input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
+    //   // GIVEN
+    //   input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
 
-      // WHEN
-      mtf.set_input_cells(input_table);
+    //   // WHEN
+    //   mtf.set_input_cells(input_table);
 
-      // THEN
-      expect(mtf.input_cells[0]).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
-      expect(mtf.input_cells[2]).toEqual(['', 'd1', 'd2', 'd3', 'd4', '']);
+    //   // THEN
+    //   expect(mtf.input_cells[0]).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
+    //   expect(mtf.input_cells[2]).toEqual(['', 'd1', 'd2', 'd3', 'd4', '']);
       
-    });
+    // });
 
     it("should chop down separator to a single one to prevent throwing off widths", function() {
       
