@@ -138,7 +138,7 @@ describe("MarkdownTableFormatter", function() {
 
       // THEN
       expect(mtf.column_widths).toEqual([0, 9, 14, 0]);
-      
+
     });
 
   });
@@ -150,11 +150,14 @@ describe("MarkdownTableFormatter", function() {
 
     it("should properly pad header output_cells", function() {
 
+      // GIVEN
       input_cells = [ ['', 'h1', 'h2', 'h3', ''] ];
       column_widths = [0, 2, 2, 2, 0];
       
+      // WHEN
       mtf.set_output_cells(input_cells, column_widths);
 
+      // THEN
       expect(mtf.output_cells).toBeDefined();
       expect(mtf.output_cells).toEqual([ ['', ' h1 ', ' h2 ', ' h3 ', ''] ]);
 
@@ -162,45 +165,53 @@ describe("MarkdownTableFormatter", function() {
 
     it("should properly expand separator output_cells", function() {
 
+      // GIVEN
       input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''] ];
       column_widths = [0, 2, 2, 2, 0];
       output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''] ];
       
+      // WHEN
       mtf.set_output_cells(input_cells, column_widths);
 
+      // THEN
       expect(mtf.output_cells).toEqual(output_cells);
 
     });
 
     it("should properly expand a full set of basic data cells", function() {
+
+      // GIVEN
       input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
       column_widths = [0, 2, 2, 2, 0];
       output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''], ['', ' d1 ', ' d2 ', ' d3 ', ''] ];
       
+      // WHEN
       mtf.set_output_cells(input_cells, column_widths);
       
+      // THEN
       expect(mtf.output_cells).toEqual(output_cells);
 
     });
 
     it("should properly expand data cells based on header length", function() {
+
+      // GIVEN
       input_cells = [ ['', 'h1_long', 'h2_longer', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
       column_widths = [0, 7, 9, 2, 0];
       output_cells = [ ['', ' h1_long ', ' h2_longer ', ' h3 ', ''], ['', '---------', '-----------', '----', ''], ['', ' d1      ', ' d2        ', ' d3 ', ''] ];
 
+      // WHEN
       mtf.set_output_cells(input_cells, column_widths);
 
+      // THEN
       expect(mtf.output_cells).toEqual(output_cells);
 
     });
 
 
-    //////////////////////////////////////////////////////////////////////
-
     it("should fill in missing data cells", function() {
 
       // GIVEN
-
       mtf.input_cells = [ 
         ['', 'h1', 'h2', 'h3', ''], 
         ['', '--', '--', '--', ''], 
@@ -210,11 +221,9 @@ describe("MarkdownTableFormatter", function() {
       mtf.column_widths = [0, 2, 2, 2, 0];
       
       // WHEN
-
       mtf.add_missing_input_cells();
 
       // THEN
-
       expect(mtf.input_cells).toEqual([ 
         ['', 'h1', 'h2', 'h3', ''], 
         ['', '--', '--', '--', ''], 
@@ -222,7 +231,6 @@ describe("MarkdownTableFormatter", function() {
       ]);
 
     });
-
 
   });
 
@@ -234,6 +242,7 @@ describe("MarkdownTableFormatter", function() {
 
     it("should properly build a basic table", function() {
 
+      // GIVEN
       output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''], ['', ' d1 ', ' d2 ', ' d3 ', ''] ];
 
       output_table = "";
@@ -241,9 +250,12 @@ describe("MarkdownTableFormatter", function() {
       output_table += "|----|----|----|\n";
       output_table += "| d1 | d2 | d3 |\n";
 
+      // WHEN
       mtf.set_output_table(output_cells)
 
+      // THEN
       expect(mtf.output_table).toEqual(output_table);
+
     });
 
   });
@@ -258,12 +270,19 @@ describe("MarkdownTableFormatter", function() {
     // add it when writing test comparisons.
 
     it("should not alter an already formatted table", function() {
+
+      // GIVEN
       input_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |";
       output_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |\n";
+
+      // THEN
       expect(mtf.format_table(input_table)).toEqual(output_table);
+
     });
 
     it("should update a standard table properly", function() {
+
+      // GIVEN
       input_table = ""
       input_table += "|h1|h2_more|h3_longer|\n";
       input_table += "|-|-|-|\n";
@@ -274,11 +293,14 @@ describe("MarkdownTableFormatter", function() {
       output_table += "|----|---------|-----------|\n";
       output_table += "| d1 | d2      | d3        |\n";
 
+      // THEN
       expect(mtf.format_table(input_table)).toEqual(output_table);
       
     });
 
     it("should add empty cells where necessary", function() {
+
+      // GIVEN
       input_table = ""
       input_table += "|h1|h2_more|h3_longer|\n";
       input_table += "|-|-|-|\n";
@@ -293,10 +315,10 @@ describe("MarkdownTableFormatter", function() {
       output_table += "| e1 | e2      |           |\n";
       output_table += "| f1 |         |           |\n";
 
+      // THEN
       expect(mtf.format_table(input_table)).toEqual(output_table);
 
     });
-
 
   });
 
