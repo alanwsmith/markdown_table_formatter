@@ -290,24 +290,24 @@ describe("MarkdownTableFormatter", function() {
       
     });
 
-    // it("should add empty cells where necessary", function() {
-    //   input_table = ""
-    //   input_table += "|h1|h2_more|h3_longer|\n";
-    //   input_table += "|-|-|-|\n";
-    //   input_table += "|d1|d2|d3|\n";
-    //   input_table += "|e1|e2|\n";
-    //   input_table += "|f1|\n";
+    it("should add empty cells where necessary", function() {
+      input_table = ""
+      input_table += "|h1|h2_more|h3_longer|\n";
+      input_table += "|-|-|-|\n";
+      input_table += "|d1|d2|d3|\n";
+      input_table += "|e1|e2|\n";
+      input_table += "|f1|\n";
 
-    //   output_table = "";
-    //   output_table += "| h1 | h2_more | h3_longer |\n";
-    //   output_table += "|----|---------|-----------|\n";
-    //   output_table += "| d1 | d2      | d3        |\n";
-    //   output_table += "| e1 | e2      |           |\n";
-    //   output_table += "| f1 |         |           |\n";
+      output_table = "";
+      output_table += "| h1 | h2_more | h3_longer |\n";
+      output_table += "|----|---------|-----------|\n";
+      output_table += "| d1 | d2      | d3        |\n";
+      output_table += "| e1 | e2      |           |\n";
+      output_table += "| f1 |         |           |\n";
 
-    //   expect(mtf.format_table(input_table)).toEqual(output_table);
+      expect(mtf.format_table(input_table)).toEqual(output_table);
 
-    // });
+    });
 
 
   });
