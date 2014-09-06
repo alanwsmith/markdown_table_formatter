@@ -3,14 +3,55 @@ function MarkdownTableFormatter() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+MarkdownTableFormatter.prototype.initialize = function(input_table) {
+
+  // Setup instance variables.
+  this.column_widths = new Array();
+  this.input_cells = new Array();
+  this.input_table = "";
+  this.output_cells = new Array();
+  this.output_table = "";
+
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
 MarkdownTableFormatter.prototype.format_table = function(input_table) {
   this.input_table = input_table;
   this.set_input_cells(input_table);
   this.set_column_widths(this.input_cells);
+  this.add_missing_input_cells();
   this.set_output_cells(this.input_cells, this.column_widths);
+  
+
+  // Gotta call this with itself to add spacing into cells that were empty.
+  // this.set_output_cells(this.output_cells, this.column_widths);
+
   this.set_output_table(this.output_cells);
   return this.output_table;
 };
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
+  for (var row_i = 0, row_l = this.input_cells.length; row_i < row_l; row_i = row_i + 1) {    
+    for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
+
+      console.log("Padding for row: " + row_i + " " + col_i);
+
+      if (typeof this.input_cells[row_i][col_i] === 'undefined') {
+        this.input_cells[row_i][col_i] = '';
+      }
+      
+    }
+  }  
+}
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,21 +82,28 @@ MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
   var input_line_array = input_table.split("\n");
 
   for (var lines_i = 0, lines_l = input_line_array.length; lines_i < lines_l; lines_i = lines_i + 1) {
-    this.input_cells[lines_i] = new Array();
+
     var current_cols_array = input_line_array[lines_i].split("\|");
 
-    for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
-      var cell_data = current_cols_array[cols_i];
+    if (current_cols_array.length > 1) {
 
-      // chomp leading and trailing space
-      cell_data = cell_data.replace(/^\s+/g,"");
-      cell_data = cell_data.replace(/\s+$/g,"");
+      this.input_cells[lines_i] = new Array();
+      
+      for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
+        var cell_data = current_cols_array[cols_i];
 
-      // reduce separator dashes to one so they don't throw off width calculation
-      cell_data = cell_data.replace(/^\-+$/,"-");
+        // chomp leading and trailing space
+        cell_data = cell_data.replace(/^\s+/g,"");
+        cell_data = cell_data.replace(/\s+$/g,"");
 
-      this.input_cells[lines_i][cols_i] = cell_data;
+        // reduce separator dashes to one so they don't throw off width calculation
+        cell_data = cell_data.replace(/^\-+$/,"-");
+
+        this.input_cells[lines_i][cols_i] = cell_data;
+      }      
     }
+
+
   }
 }
 
@@ -68,8 +116,9 @@ MarkdownTableFormatter.prototype.set_output_cells = function (input_cells, colum
 
   for (var row_i = 0, row_l = input_cells.length; row_i < row_l; row_i = row_i + 1) {
     this.output_cells[row_i] = new Array();
-
+    
     for (var col_i = 0, col_l = input_cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
+
 
       var output_cell = ""; // Create an empty string to start with;
 

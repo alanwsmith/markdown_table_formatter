@@ -18,6 +18,7 @@ describe("MarkdownTableFormatter", function() {
   beforeEach(function() {
     
     mtf = new MarkdownTableFormatter();
+    mtf.initialize();
     
     column_widths = new Array();
     input_cells = new Array();
@@ -91,6 +92,21 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.input_cells[1][3]).toEqual('');
 
     });  
+
+
+    it("should not add output rows for empty lines", function() {
+
+      // GIVEN
+
+      input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
+
+      // WHEN 
+      mtf.set_input_cells(input_table);
+
+      expect(mtf.input_cells.length).toEqual(3);
+
+    });
+
 
   });
 
@@ -190,7 +206,39 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+
+    //////////////////////////////////////////////////////////////////////
+
+    it("should fill in missing data cells", function() {
+
+      // GIVEN
+
+      mtf.input_cells = [ 
+        ['', 'h1', 'h2', 'h3', ''], 
+        ['', '--', '--', '--', ''], 
+        ['', 'd1', 'd2', '']
+      ];
+      
+      mtf.column_widths = [0, 2, 2, 2, 0];
+      
+      // WHEN
+
+      mtf.add_missing_input_cells();
+
+      // THEN
+
+      expect(mtf.input_cells).toEqual([ 
+        ['', 'h1', 'h2', 'h3', ''], 
+        ['', '--', '--', '--', ''], 
+        ['', 'd1', 'd2', '', '']
+      ]);
+
+    });
+
+
   });
+
+
 
   ////////////////////////////////////////////////////////////////////////////////
 
@@ -241,6 +289,26 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.format_table(input_table)).toEqual(output_table);
       
     });
+
+    it("should add empty cells where necessary", function() {
+      input_table = ""
+      input_table += "|h1|h2_more|h3_longer|\n";
+      input_table += "|-|-|-|\n";
+      input_table += "|d1|d2|d3|\n";
+      input_table += "|e1|e2|\n";
+      input_table += "|f1|\n";
+
+      output_table = "";
+      output_table += "| h1 | h2_more | h3_longer |\n";
+      output_table += "|----|---------|-----------|\n";
+      output_table += "| d1 | d2      | d3        |\n";
+      output_table += "| e1 | e2      |           |\n";
+      output_table += "| f1 |         |           |\n";
+
+      expect(mtf.format_table(input_table)).toEqual(output_table);
+
+    });
+
 
   });
 
