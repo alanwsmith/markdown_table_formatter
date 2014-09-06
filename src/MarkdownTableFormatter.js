@@ -65,11 +65,11 @@ MarkdownTableFormatter.prototype.set_column_widths = function() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MarkdownTableFormatter.prototype.set_input_cells = function() {
+MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
 
   this.input_cells = new Array();
 
-  var input_line_array = this.input_table.split("\n");
+  var input_line_array = input_table.split("\n");
 
   for (var lines_i = 0, lines_l = input_line_array.length; lines_i < lines_l; lines_i = lines_i + 1) {
 
@@ -92,8 +92,6 @@ MarkdownTableFormatter.prototype.set_input_cells = function() {
         this.input_cells[lines_i][cols_i] = cell_data;
       }      
     }
-
-
   }
 }
 

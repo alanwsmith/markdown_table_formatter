@@ -35,10 +35,10 @@ describe("MarkdownTableFormatter", function() {
     it("should properly create the array of arrays for all table cells", function() {
 
       // GIVEN
-      mtf.input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
+      input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
       
       // WHEN
-      mtf.set_input_cells();
+      mtf.set_input_cells(input_table);
 
       // THEN
       expect(mtf.input_cells[0].length).toEqual(4);
@@ -56,10 +56,10 @@ describe("MarkdownTableFormatter", function() {
     it("should properly remove white space when loading the table", function() {
 
       // GIVEN
-      mtf.input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
+      input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
 
       // WHEN
-      mtf.set_input_cells();
+      mtf.set_input_cells(input_table);
 
       // THEN
       expect(mtf.input_cells[0]).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
@@ -70,10 +70,10 @@ describe("MarkdownTableFormatter", function() {
     it("should chop down separator to a single one to prevent throwing off widths", function() {
       
       // GIVEN
-      mtf.input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
+      input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
 
       // WHEN
-      mtf.set_input_cells();
+      mtf.set_input_cells(input_table);
 
       // THEN
       expect(mtf.input_cells[1]).toEqual([ '', '-', '-', '' ]);
@@ -84,10 +84,10 @@ describe("MarkdownTableFormatter", function() {
     it("should not add output rows for empty lines", function() {
 
       // GIVEN
-      mtf.input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
+      input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
 
       // WHEN 
-      mtf.set_input_cells();
+      mtf.set_input_cells(input_table);
 
       // THEN
       expect(mtf.input_cells.length).toEqual(3);
