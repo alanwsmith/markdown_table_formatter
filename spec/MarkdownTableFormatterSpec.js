@@ -66,6 +66,19 @@ describe("MarkdownTableFormatter", function() {
       
     });
 
+    it("should remove white space from header cells", function() {
+
+      // GIVEN
+      mtf.source_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
+
+      // WHEN
+      mtf.load_header_cells();
+
+      // THEN
+      expect(mtf.header_cells).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
+      
+    });
+
   });
 
 

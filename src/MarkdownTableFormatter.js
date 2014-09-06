@@ -48,6 +48,11 @@ MarkdownTableFormatter.prototype.load_header_cells = function() {
   var source_table_lines = this.source_table.split("\n");
   this.header_cells = source_table_lines[0].split('\|');
 
+  for (var cell_index = 0, cell_count = this.header_cells.length; cell_index < cell_count; cell_index = cell_index + 1) {
+    this.header_cells[cell_index] = this.header_cells[cell_index].replace(/^\s+/g,"");
+    this.header_cells[cell_index] = this.header_cells[cell_index].replace(/\s+$/g,"");
+  }
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
