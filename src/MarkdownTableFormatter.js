@@ -10,20 +10,6 @@ function MarkdownTableFormatter() {
 
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-
-MarkdownTableFormatter.prototype.format_table = function(input_table) {
-  this.set_input_cells(input_table);
-  this.set_column_widths();
-  this.add_missing_input_cells();
-  this.set_output_cells(this.input_cells, this.column_widths);
-  this.set_output_table(this.output_cells);
-  return this.output_table;
-};
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
 
 MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
@@ -36,6 +22,17 @@ MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
   }  
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.format_table = function(input_table) {
+  this.set_input_cells(input_table);
+  this.set_column_widths();
+  this.add_missing_input_cells();
+  this.set_output_cells(this.input_cells, this.column_widths);
+  this.set_output_table(this.output_cells);
+  return this.output_table;
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,8 +49,8 @@ MarkdownTableFormatter.prototype.load_header_cells = function() {
     this.header_cells[cell_index] = this.header_cells[cell_index].replace(/^\s+/g,"");
     this.header_cells[cell_index] = this.header_cells[cell_index].replace(/\s+$/g,"");
   }
-
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
