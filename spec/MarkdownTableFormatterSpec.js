@@ -192,31 +192,39 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should fill in missing data cells", function() {
-    //   output_cells_original = [ 
-    //     ['', ' h1 ', ' h2 ', ' h3 ', ''], 
-    //     ['', '----', '----', '----', ''], 
-    //     ['', ' d1 ', ' d2 ', '', '']
-    //   ];
+
+    //////////////////////////////////////////////////////////////////////
+
+  //   it("should fill in missing data cells", function() {
+
+  //     // GIVEN
+
+  //     mtf.output_cells = [ 
+  //       ['', ' h1 ', ' h2 ', ' h3 ', ''], 
+  //       ['', '----', '----', '----', ''], 
+  //       ['', ' d1 ', ' d2 ', '']
+  //     ];
       
-    //   column_widths = [0, 2, 2, 2, 0];
+  //     mtf.column_widths = [0, 2, 2, 2, 0];
       
-    //   output_cells_updated = [ 
-    //     ['', ' h1 ', ' h2 ', ' h3 ', ''], 
-    //     ['', '----', '----', '----', ''], 
-    //     ['', ' d1 ', ' d2 ', '', '']
-    //   ];
+  //     // WHEN
 
+  //     mtf.pad_missing_output_cells();
 
+  //     // THEN
 
+  //     expect(mtf.output_cells).toEqual([ 
+  //       ['', ' h1 ', ' h2 ', ' h3 ', ''], 
+  //       ['', '----', '----', '----', ''], 
+  //       ['', ' d1 ', ' d2 ', '', '']
+  //     ]);
 
-    //   mtf.pad_missing_output_cells(output_cells_original, column_widths);
+  //   });
 
-    //   expect(mtf.output_cells).toEqual(output_cells_updated);
-
-    // });
 
   });
+
+
 
   ////////////////////////////////////////////////////////////////////////////////
 
