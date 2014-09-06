@@ -72,21 +72,28 @@ MarkdownTableFormatter.prototype.set_input_cells = function(input_table) {
   var input_line_array = input_table.split("\n");
 
   for (var lines_i = 0, lines_l = input_line_array.length; lines_i < lines_l; lines_i = lines_i + 1) {
-    this.input_cells[lines_i] = new Array();
+
     var current_cols_array = input_line_array[lines_i].split("\|");
 
-    for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
-      var cell_data = current_cols_array[cols_i];
+    if (current_cols_array.length > 1) {
 
-      // chomp leading and trailing space
-      cell_data = cell_data.replace(/^\s+/g,"");
-      cell_data = cell_data.replace(/\s+$/g,"");
+      this.input_cells[lines_i] = new Array();
+      
+      for (var cols_i = 0, cols_l = current_cols_array.length; cols_i < cols_l; cols_i = cols_i + 1) {
+        var cell_data = current_cols_array[cols_i];
 
-      // reduce separator dashes to one so they don't throw off width calculation
-      cell_data = cell_data.replace(/^\-+$/,"-");
+        // chomp leading and trailing space
+        cell_data = cell_data.replace(/^\s+/g,"");
+        cell_data = cell_data.replace(/\s+$/g,"");
 
-      this.input_cells[lines_i][cols_i] = cell_data;
+        // reduce separator dashes to one so they don't throw off width calculation
+        cell_data = cell_data.replace(/^\-+$/,"-");
+
+        this.input_cells[lines_i][cols_i] = cell_data;
+      }      
     }
+
+
   }
 }
 

@@ -94,6 +94,20 @@ describe("MarkdownTableFormatter", function() {
     });  
 
 
+    it("should not add output rows for empty lines", function() {
+
+      // GIVEN
+
+      input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
+
+      // WHEN 
+      mtf.set_input_cells(input_table);
+
+      expect(mtf.input_cells.length).toEqual(3);
+
+    });
+
+
   });
 
 
@@ -275,6 +289,7 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.format_table(input_table)).toEqual(output_table);
       
     });
+
 
   });
 
