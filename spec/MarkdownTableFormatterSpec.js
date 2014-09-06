@@ -93,6 +93,20 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+
+    it("should pull in multiple lines", function() {
+
+      // GIVEN
+      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n|e1|e2|\n|f1|f2|\n\n";
+
+      // WHEN
+      mtf.load_body_cells();
+
+      // THEN
+      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', ''], ['', 'e1', 'e2', ''], ['', 'f1', 'f2', '']]);
+
+    });
+
   });
 
 
