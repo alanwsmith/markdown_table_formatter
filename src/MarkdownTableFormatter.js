@@ -10,7 +10,7 @@ function MarkdownTableFormatter() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MarkdownTableFormatter.prototype.add_missing_cell_columns = function(table) {
+MarkdownTableFormatter.prototype.add_missing_cell_columns = function() {
 
   this.column_widths = [2,2,2,2];
 
@@ -42,6 +42,15 @@ MarkdownTableFormatter.prototype.format_table = function(table) {
   this.output_table += " |\n";
 
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+// MarkdownTableFormatter.prototype.get_column_widths = function() {
+
+
+// }
 
 
 
