@@ -32,7 +32,34 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+  });
 
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("add_missing_cell_columns", function() {
+
+    it("should added empty cells where necessary", function() {
+
+      // GIVEN
+      mtf.cells = [ 
+        ['h1', 'h2', 'h3', "h4"], 
+        ['-','-', '-', '-'], 
+        ['d1','d2','d3'] 
+      ];
+
+      // WHEN
+      mtf.add_missing_cell_columns();
+
+      // THEN 
+      expect(mtf.cells).toEqual([
+        ['h1', 'h2', 'h3', "h4"], 
+        ['-','-', '-', '-'], 
+        ['d1','d2','d3', '']
+      ]);
+
+
+    });
   });
 
 
