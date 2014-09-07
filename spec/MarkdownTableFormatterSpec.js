@@ -2,9 +2,11 @@ describe("MarkdownTableFormatter", function() {
 
   // Initialize variables
   var mtf;
+  var table = "";
 
   beforeEach(function() {    
     mtf = new MarkdownTableFormatter();
+    table = "";
 
   });
 
@@ -113,13 +115,26 @@ describe("MarkdownTableFormatter", function() {
 
     it("should build a basic table", function() {
 
+      // GIVEN 
+      table = "|h1|h2|\n|-|-|\n|d1|d2|";
+
       // WHEN
-      mtf.format_table("|h1|h2|\n|-|-|\n|d1|d2|");
+      mtf.format_table(table);
 
       // THEN 
       expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n");
 
     });
+
+    // it("should build a table where cells are added", function() {
+
+    //   //
+
+    //   // WHEN
+    //   mtf.format_table("|h1|h2|\n|-|-|\n|d1|d2|");
+
+
+    // });
 
   });
 
