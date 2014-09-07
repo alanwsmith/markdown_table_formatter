@@ -31,6 +31,7 @@ MarkdownTableFormatter.prototype.format_table = function(table) {
   this.import_table(table);
   this.get_column_widths();
   this.add_missing_cell_columns();
+  this.pad_cells_for_output();
 
   // Header
   this.output_table = "| ";
@@ -94,6 +95,29 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
       this.cells[row_i][col_i] = row_columns[col_i]
       this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/^\s+/g,"");
       this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/\s+$/g,"");
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.pad_cells_for_output = function() {
+
+  for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+    for (var col_i = 0, col_l = this.cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
+
+      // Handle anything that's not the separator row
+      if (row_i != 1) {
+        while(this.cells[row_i][col_i].length < this.column_widths[col_i]) {
+          this.cells[row_i][col_i] += " ";
+        }
+      }
+      // Handle the separator row.
+      else {
+        while(this.cells[row_i][col_i].length < this.column_widths[col_i]) {
+          this.cells[row_i][col_i] += "-";
+        }
+      }
     }
   }
 }

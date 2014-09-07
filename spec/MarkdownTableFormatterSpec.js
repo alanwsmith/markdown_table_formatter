@@ -109,6 +109,37 @@ describe("MarkdownTableFormatter", function() {
   });
 
 
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("pad_cells_for_output", function() {
+
+    it("should add the proper white space to each cell", function() {
+
+      // GIVEN
+      mtf.cells = [
+        ['h1', 'header', 'header_number_3'],
+        ['--', '------', '---------------'],
+        ['data_1', 'd2', 'data_3']
+      ];
+
+      // WHEN
+      mtf.get_column_widths();
+      mtf.pad_cells_for_output();
+
+      // THEN
+      expect(mtf.cells).toEqual([
+        ['h1    ', 'header', 'header_number_3'],
+        ['------', '------', '---------------'],
+        ['data_1', 'd2    ', 'data_3         ']
+      ]);
+
+    });
+
+  });
+
+
+
   ////////////////////////////////////////////////////////////////////////////////
 
   describe("Integration Tests", function() {
@@ -126,18 +157,18 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should format a table with different length cells", function() {
+    it("should format a table with different length cells", function() {
 
-    //   // GIVEN 
-    //   table = "|h1|h2|header3|\n|-----|----------|\n|data1|data_cell2|d3|";
+      // GIVEN 
+      table = "|h1|h2|header3|\n|-----|----------|-------|\n|data1|data_cell2|d3|";
 
-    //   // WHEN
-    //   mtf.format_table(table);
+      // WHEN
+      mtf.format_table(table);
 
-    //   // THEN 
-    //   expect(mtf.output_table).toEqual("| h1    | h2         |\n|-------|------------|\n| data1 | data_cell2 | d3     |\n");      
+      // THEN 
+      expect(mtf.output_table).toEqual("| h1    | h2         | header3 |\n|-------|------------|---------|\n| data1 | data_cell2 | d3      |\n");      
 
-    // });
+    });
 
     // it("should build a table where cells are added", function() {
 
