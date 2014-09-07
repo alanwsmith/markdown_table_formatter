@@ -7,8 +7,8 @@
 function format_table() {
   var md_table_holder = document.getElementById('md_table_holder');
   var mtf = new MarkdownTableFormatter();
-  md_table_holder.value = mtf.format_table(md_table_holder.value);
-  // alert("Turned off for refactoring");
+  mtf.format_table(md_table_holder.value)
+  md_table_holder.value = mtf.output_table;
 }
   </script>
   <style type="text/css">
@@ -27,7 +27,7 @@ textarea { font-family: monospace; font-size: 14px; }
 | data1a | Data is longer than header | 1 |
 | d1b | add a cell|
 |lorem|ipsum|3|
-| |empty outside cells
+| |TODO: empty outside cells
 | skip| | 5 |
 | six | Morbi purus | 6 |</textarea>
     <br>

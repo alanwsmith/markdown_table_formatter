@@ -22,8 +22,6 @@ MarkdownTableFormatter.prototype.add_missing_cell_columns = function() {
 
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 
 MarkdownTableFormatter.prototype.format_table = function(table) {
@@ -50,7 +48,6 @@ MarkdownTableFormatter.prototype.format_table = function(table) {
     this.output_table += " |\n";
   }
 
-  return this.output_table;
 }
 
 
@@ -69,7 +66,6 @@ MarkdownTableFormatter.prototype.get_column_widths = function() {
       }
     }
   }
-
 }
 
 
@@ -81,6 +77,13 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
   var table_rows = table.split("\n");
 
   for (var row_i = 0, row_l = table_rows.length; row_i < row_l; row_i = row_i + 1) {
+
+
+    // TODO: Set up the indexes so that empty lines at either the top or bottom will
+    // be removed. Right now, this is only helpful for empty lines at the bottom.
+    if(table_rows[row_i].indexOf('|') == -1) {
+      continue;
+    }
 
     this.cells[row_i] = new Array();
 

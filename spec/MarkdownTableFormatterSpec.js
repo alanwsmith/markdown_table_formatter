@@ -103,6 +103,21 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+    it("should not add empty rows for empty lines", function() {
+
+      // GIVEN
+      table  = "| h1 | h2 |\n";
+      table += "|----|----|\n";
+      table += "| d1 | d2 |\n\n\n\n";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
+
   });
 
 
@@ -198,21 +213,21 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should not alter an already formatted table", function() {
+    it("should not alter an already formatted table", function() {
 
-    //   // GIVEN 
-    //   table  = "| header1 | h2         | header three |\n";
-    //   table += "|---------|------------|--------------|\n";
-    //   table += "| data1   | data_cell2 | d3           |\n";
-    //   table += "| row e   | e2         |              |\n";
+      // GIVEN 
+      table  = "| header1 | h2         | header three |\n";
+      table += "|---------|------------|--------------|\n";
+      table += "| data1   | data_cell2 | d3           |\n";
+      table += "| row e   | e2         |              |\n";
 
-    //   // WHEN
-    //   mtf.format_table(table);
+      // WHEN
+      mtf.format_table(table);
 
-    //   // THEN 
-    //   expect(mtf.output_table).toEqual(table);
+      // THEN 
+      expect(mtf.output_table).toEqual(table);
 
-    // });
+    });
 
   });
 
