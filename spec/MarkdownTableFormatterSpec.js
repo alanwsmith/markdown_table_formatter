@@ -88,6 +88,21 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+    it("should reduce the items in the separator row so they don't mess with spacing", function() {
+
+      // GIVEN
+      table  = "| h1 | h2 |\n";
+      table += "|-------|--------|\n";
+      table += "| d1 | d2 |";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
+
   });
 
 
@@ -182,6 +197,22 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n| e1 |    |\n");
 
     });
+
+    // it("should not alter an already formatted table", function() {
+
+    //   // GIVEN 
+    //   table  = "| header1 | h2         | header three |\n";
+    //   table += "|---------|------------|--------------|\n";
+    //   table += "| data1   | data_cell2 | d3           |\n";
+    //   table += "| row e   | e2         |              |\n";
+
+    //   // WHEN
+    //   mtf.format_table(table);
+
+    //   // THEN 
+    //   expect(mtf.output_table).toEqual(table);
+
+    // });
 
   });
 

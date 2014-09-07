@@ -96,6 +96,11 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
       this.cells[row_i][col_i] = row_columns[col_i]
       this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/^\s+/g,"");
       this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/\s+$/g,"");
+
+      // If it's the separator row, just put in a single dash
+      if (row_i == 1) {
+        this.cells[row_i][col_i] = "-";
+      }
     }
   }
 }
