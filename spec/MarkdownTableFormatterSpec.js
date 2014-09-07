@@ -170,18 +170,18 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should build a table where cells are added", function() {
+    it("should build a table where cells are added", function() {
 
-    //   // GIVEN
-    //   table = "|h1|h2|\n|-|-|\n|d1|d2|\n|e1|";
+      // GIVEN
+      table = "|h1|h2|\n|-|-|\n|d1|d2|\n|e1|";
 
-    //   // WHEN
-    //   mtf.format_table(table);
+      // WHEN
+      mtf.format_table(table);
 
-    //   // THEN 
-    //   expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n| e1 |    |\n");
+      // THEN 
+      expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n| e1 |    |\n");
 
-    // });
+    });
 
   });
 
