@@ -32,10 +32,16 @@ MarkdownTableFormatter.prototype.format_table = function(table) {
   this.get_column_widths();
   this.add_missing_cell_columns();
 
+  // Header
   this.output_table = "| ";
   this.output_table += this.cells[0].join(" | ");
   this.output_table += " |\n";
-  this.output_table += "|----|----|\n";
+
+  // Separator 
+  this.output_table += "|-";
+  this.output_table += this.cells[1].join("-|-");
+  this.output_table += "-|\n";
+
 
   for (var row_i = 2, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
     this.output_table += "| ";

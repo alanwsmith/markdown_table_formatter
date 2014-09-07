@@ -116,7 +116,7 @@ describe("MarkdownTableFormatter", function() {
     it("should build a basic table", function() {
 
       // GIVEN 
-      table = "|h1|h2|\n|-|-|\n|d1|d2|";
+      table = "|h1|h2|\n|--|--|\n|d1|d2|";
 
       // WHEN
       mtf.format_table(table);
@@ -125,6 +125,19 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n");
 
     });
+
+    // it("should format a table with different length cells", function() {
+
+    //   // GIVEN 
+    //   table = "|h1|h2|header3|\n|-----|----------|\n|data1|data_cell2|d3|";
+
+    //   // WHEN
+    //   mtf.format_table(table);
+
+    //   // THEN 
+    //   expect(mtf.output_table).toEqual("| h1    | h2         |\n|-------|------------|\n| data1 | data_cell2 | d3     |\n");      
+
+    // });
 
     // it("should build a table where cells are added", function() {
 
