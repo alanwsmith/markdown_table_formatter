@@ -2,6 +2,7 @@ function MarkdownTableFormatter() {
 
   // Setup instance variables.
   this.cells = new Array();
+  this.column_widths = new Array();
   this.output_table = "";
 
 }

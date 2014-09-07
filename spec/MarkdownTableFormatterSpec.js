@@ -38,6 +38,25 @@ describe("MarkdownTableFormatter", function() {
 
 
   ////////////////////////////////////////////////////////////////////////////////
+  // describe("get_column_widths", function() {
+
+  //   // GIVEN
+  //   mtf.cells = [
+  //     ['h1', 'h2', 'header_number_3'],
+  //     ['-','-','-'],
+  //     ['data_1', 'd2', 'data_3']
+  //   ];
+
+  //   // WHEN
+  //   mtf.get_column_widths();
+
+  //   // THEN
+  //   expect(mtf.column_widths).toEqual([6,2,15]);
+
+  // });
+
+
+  ////////////////////////////////////////////////////////////////////////////////
   describe("import_table", function() {
 
     it("should import a basic table properly", function() {
@@ -75,6 +94,7 @@ describe("MarkdownTableFormatter", function() {
       // THEN
       expect(mtf.cells.length).toEqual(0);
       expect(mtf.output_table).toEqual("");
+      expect(mtf.column_widths).toEqual([]);
 
     });
   });
