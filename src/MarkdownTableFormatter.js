@@ -50,6 +50,7 @@ MarkdownTableFormatter.prototype.format_table = function(table) {
     this.output_table += " |\n";
   }
 
+  return this.output_table;
 }
 
 
