@@ -38,22 +38,26 @@ describe("MarkdownTableFormatter", function() {
 
 
   ////////////////////////////////////////////////////////////////////////////////
-  // describe("get_column_widths", function() {
+  describe("get_column_widths", function() {
 
-  //   // GIVEN
-  //   mtf.cells = [
-  //     ['h1', 'h2', 'header_number_3'],
-  //     ['-','-','-'],
-  //     ['data_1', 'd2', 'data_3']
-  //   ];
+    it("should load the proper column widths", function() {
 
-  //   // WHEN
-  //   mtf.get_column_widths();
+      // GIVEN
+      mtf.cells = [
+        ['h1', 'h2', 'header_number_3'],
+        ['-','-','-'],
+        ['data_1', 'd2', 'data_3']
+      ];
 
-  //   // THEN
-  //   expect(mtf.column_widths).toEqual([6,2,15]);
+      // WHEN
+      mtf.get_column_widths();
 
-  // });
+      // THEN
+      expect(mtf.column_widths).toEqual([6,2,15]);
+
+    });
+    
+  });
 
 
   ////////////////////////////////////////////////////////////////////////////////
