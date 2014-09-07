@@ -11,9 +11,6 @@ function MarkdownTableFormatter() {
 ////////////////////////////////////////////////////////////////////////////////
 
 MarkdownTableFormatter.prototype.add_missing_cell_columns = function() {
-
-  this.column_widths = [2,2,2,2];
-
   for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
     for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
       if (typeof this.cells[row_i][col_i] === 'undefined') {

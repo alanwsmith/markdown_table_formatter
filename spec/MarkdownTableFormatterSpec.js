@@ -21,6 +21,9 @@ describe("MarkdownTableFormatter", function() {
         ['d1','d2','d3'] 
       ];
 
+      mtf.column_widths = [2,2,2,2];
+
+
       // WHEN
       mtf.add_missing_cell_columns();
 
@@ -56,7 +59,7 @@ describe("MarkdownTableFormatter", function() {
       expect(mtf.column_widths).toEqual([6,2,15]);
 
     });
-    
+
   });
 
 
