@@ -13,6 +13,7 @@ function MarkdownTableFormatter() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: Remove this.
 MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
   for (var row_i = 0, row_l = this.input_cells.length; row_i < row_l; row_i = row_i + 1) {    
     for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
@@ -30,7 +31,7 @@ MarkdownTableFormatter.prototype.add_missing_input_cells = function() {
 
 // MarkdownTableFormatter.prototype.calculate_column_widths = function() {
 
-  
+
 // }
 
 
