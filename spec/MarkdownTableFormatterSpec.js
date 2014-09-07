@@ -48,10 +48,27 @@ describe("MarkdownTableFormatter", function() {
 
       // THEN
       expect(mtf.cells.length).toEqual(0);
+      expect(mtf.output_table).toEqual("");
 
     });
   });
 
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("Integration Tests", function() {
+
+    it("should build a basic table", function() {
+
+      // WHEN
+      mtf.format_table("|h1|h2|\n|-|-|\n|d1|d2|");
+
+      // THEN 
+      expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n");
+
+    });
+
+  });
 
 
 });

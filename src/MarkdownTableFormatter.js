@@ -2,8 +2,29 @@ function MarkdownTableFormatter() {
 
   // Setup instance variables.
   this.cells = new Array();
+  this.output_table = "";
 
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+MarkdownTableFormatter.prototype.format_table = function(table) {
+
+  this.import_table(table);
+
+  this.output_table = "| ";
+  this.output_table += this.cells[0].join(" | ");
+  this.output_table += " |\n";
+  this.output_table += "|----|----|\n";
+  this.output_table += "| ";
+  this.output_table += this.cells[2].join(" | ");
+  this.output_table += " |\n";
+   
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
