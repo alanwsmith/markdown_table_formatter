@@ -25,7 +25,8 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
 
     for (var col_i = 0, col_l = row_columns.length; col_i < col_l; col_i = col_i + 1) {
       this.cells[row_i][col_i] = row_columns[col_i]
-      
+      this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/^\s+/g,"");
+      this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/\s+$/g,"");
     }
   }
 }
