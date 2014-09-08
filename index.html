@@ -10,6 +10,25 @@ function format_table() {
   mtf.format_table(md_table_holder.value)
   md_table_holder.value = mtf.output_table;
 }
+
+function loadExample(example_number) {
+
+  var md_table_holder = document.getElementById('md_table_holder');
+
+  switch (example_number) {
+    case 1:
+      document.getElementById('md_table_holder').value = "| h1 | h2 | h3 |\n|-|-|-|\n| data1 | data2 | data3 |";
+      break;
+    case 2:
+      document.getElementById('md_table_holder').value = "h1 | h2 | h3\n-|-|-\ndata-1 | data-2 | data-3";
+      break;
+    case 3:
+      document.getElementById('md_table_holder').value = "| Header 1 | Header 2 | Header 3 |\n|----|---|-|\n| data1a | Data is longer than header | 1 |\n| d1b | add a cell|\n|lorem|ipsum|3|\n| |TODO: empty outside cells\n| skip| | 5 |\n| six | Morbi purus | 6 |";
+
+
+  }
+}
+
   </script>
   <style type="text/css">
 textarea { font-family: monospace; font-size: 14px; }
@@ -20,7 +39,14 @@ textarea { font-family: monospace; font-size: 14px; }
   <h1>Markdown Table Formatter</h1>
   <p>This tool is a very early stage work in progress. When finished it will &quot;Pretty Print&quot; MultiMarkdown style tables.</p>
   <p>Only the most basic, well-formed tables are currently processed correctly. Your Mileage May Vary.</p>
-  <p>To see what it's all about, click the &quot;Format Table&quot; with the example table, or format your own.</p>
+  <p>To see what it's all about, try one of these examples, or format your own.</p>
+
+  <p>Load: 
+    <a href="#" onClick="loadExample(1); return false;">Example 1</a> - 
+    <a href="#" onClick="loadExample(2); return false;">Example 2</a> - 
+    <a href="#" onClick="loadExample(3); return false;">Example 3</a>
+  </p>
+
   <form>  
     <textarea id="md_table_holder" cols="110" rows="20">| Header 1 | Header 2 | Header 3 |
 |-|---|-|
