@@ -1,233 +1,167 @@
 describe("MarkdownTableFormatter", function() {
 
-  // TODO: Add test where the first data cell is the longest cell.
-  // TODO: Add test where there are more body columns than header columns.
-  // TODO: Right justify numbers
-  // TODO: Deal with lines that don't have a starting "|"
-  // TODO: Deal with lines that don't have an ending "|"
-
+  // Initialize variables
   var mtf;
-  var column_widths;
-  var input_cells;
-  var input_table;
-  var output_cells;
-  var output_table;
-  
+  var table = "";
 
-  beforeEach(function() {
-    
+  beforeEach(function() {    
     mtf = new MarkdownTableFormatter();
-    mtf.initialize();
-    
-    column_widths = new Array();
-    input_cells = new Array();
-    input_table = "";
-    output_cells = new Array();
-    output_table = "";
+    table = "";
 
   });
 
-
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("set_input_cells", function() {
+  describe("add_missing_cell_columns", function() {
 
-    it("should properly create the array of arrays for all table cells", function() {
-
-      // GIVEN
-      input_table = "|h1_c|h2_c|\n|-|-|\n|d1_c|d2_c|";
-      
-      // WHEN
-      mtf.set_input_cells(input_table);
-
-      // THEN
-      expect(mtf.input_cells[0].length).toEqual(4);
-      expect(mtf.input_cells[0]).toEqual(['', 'h1_c', 'h2_c', '']);
-
-      expect(mtf.input_cells[1].length).toEqual(4);
-      expect(mtf.input_cells[1]).toEqual(['', '-', '-', '']);
-      
-      expect(mtf.input_cells[2].length).toEqual(4);
-      expect(mtf.input_cells[2]).toEqual(['', 'd1_c', 'd2_c', '']);
-      
-    });
-
-
-    it("should properly remove white space when loading the table", function() {
+    it("should added empty cells where necessary", function() {
 
       // GIVEN
-      input_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
-
-      // WHEN
-      mtf.set_input_cells(input_table);
-
-      // THEN
-      expect(mtf.input_cells[0]).toEqual(['', 'h1', 'h2', 'h3', 'h4', '']);
-      expect(mtf.input_cells[2]).toEqual(['', 'd1', 'd2', 'd3', 'd4', '']);
-      
-    });
-
-    it("should chop down separator to a single one to prevent throwing off widths", function() {
-      
-      // GIVEN
-      input_table = "|h1|h2|\n|------|---------|\n|d1|d2|";
-
-      // WHEN
-      mtf.set_input_cells(input_table);
-
-      // THEN
-      expect(mtf.input_cells[1]).toEqual([ '', '-', '-', '' ]);
-
-    });  
-
-
-    it("should not add output rows for empty lines", function() {
-
-      // GIVEN
-      input_table = "|h1|h2|\n|--|--|\n|d1|d2|\n\n";
-
-      // WHEN 
-      mtf.set_input_cells(input_table);
-
-      // THEN
-      expect(mtf.input_cells.length).toEqual(3);
-
-    });
-
-
-  });
-
-
-  ////////////////////////////////////////////////////////////////////////////////
-
-  describe("set_column_widths", function() {
-
-    it("should properly identify target column widths when source has no padding", function() {
-      
-      // GIVEN
-      mtf.input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
-
-      // WHEN
-      mtf.set_column_widths();
-
-      // THEN
-      expect(mtf.column_widths).toEqual([0, 2, 2, 2, 0]);
-      
-    });
-
-    it("should properly identify column widths when the header is longer than the cells", function() {
-
-      // GIVEN
-      mtf.input_cells = [ ['', 'header_long', 'header', ''], ['', '-', '-', ''], ['', 'd1', 'd2', ''] ];
-
-      // WHEN
-      mtf.set_column_widths();
-
-      // THEN
-      expect(mtf.column_widths).toEqual([0, 11, 6, 0 ]);
-      
-    });
-
-    it("should properly set column widths when a cell in the last row is the longest", function() {
-
-      // GIVEN
-      mtf.input_cells = [ ['', 'h1', 'h2', ''], ['', '-', '-', ''], ['', 'data_cell', 'long_data_cell', ''] ];
-
-      // WHEN
-      mtf.set_column_widths();
-
-      // THEN
-      expect(mtf.column_widths).toEqual([0, 9, 14, 0]);
-
-    });
-
-  });
-
-
-  ////////////////////////////////////////////////////////////////////////////////
-
-  describe("set_output_cells", function() {
-
-    it("should properly pad header output_cells", function() {
-
-      // GIVEN
-      input_cells = [ ['', 'h1', 'h2', 'h3', ''] ];
-      column_widths = [0, 2, 2, 2, 0];
-      
-      // WHEN
-      mtf.set_output_cells(input_cells, column_widths);
-
-      // THEN
-      expect(mtf.output_cells).toBeDefined();
-      expect(mtf.output_cells).toEqual([ ['', ' h1 ', ' h2 ', ' h3 ', ''] ]);
-
-    });
-
-    it("should properly expand separator output_cells", function() {
-
-      // GIVEN
-      input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''] ];
-      column_widths = [0, 2, 2, 2, 0];
-      output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''] ];
-      
-      // WHEN
-      mtf.set_output_cells(input_cells, column_widths);
-
-      // THEN
-      expect(mtf.output_cells).toEqual(output_cells);
-
-    });
-
-    it("should properly expand a full set of basic data cells", function() {
-
-      // GIVEN
-      input_cells = [ ['', 'h1', 'h2', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
-      column_widths = [0, 2, 2, 2, 0];
-      output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''], ['', ' d1 ', ' d2 ', ' d3 ', ''] ];
-      
-      // WHEN
-      mtf.set_output_cells(input_cells, column_widths);
-      
-      // THEN
-      expect(mtf.output_cells).toEqual(output_cells);
-
-    });
-
-    it("should properly expand data cells based on header length", function() {
-
-      // GIVEN
-      input_cells = [ ['', 'h1_long', 'h2_longer', 'h3', ''], ['', '-', '-', '-', ''], ['', 'd1', 'd2', 'd3', ''] ];
-      column_widths = [0, 7, 9, 2, 0];
-      output_cells = [ ['', ' h1_long ', ' h2_longer ', ' h3 ', ''], ['', '---------', '-----------', '----', ''], ['', ' d1      ', ' d2        ', ' d3 ', ''] ];
-
-      // WHEN
-      mtf.set_output_cells(input_cells, column_widths);
-
-      // THEN
-      expect(mtf.output_cells).toEqual(output_cells);
-
-    });
-
-
-    it("should fill in missing data cells", function() {
-
-      // GIVEN
-      mtf.input_cells = [ 
-        ['', 'h1', 'h2', 'h3', ''], 
-        ['', '--', '--', '--', ''], 
-        ['', 'd1', 'd2', '']
+      mtf.cells = [ 
+        ['h1', 'h2', 'h3', "h4"], 
+        ['-','-', '-', '-'], 
+        ['d1','d2','d3'] 
       ];
-      
-      mtf.column_widths = [0, 2, 2, 2, 0];
-      
+
+      mtf.column_widths = [2,2,2,2];
+
+
       // WHEN
-      mtf.add_missing_input_cells();
+      mtf.add_missing_cell_columns();
+
+      // THEN 
+      expect(mtf.cells).toEqual([
+        ['h1', 'h2', 'h3', "h4"], 
+        ['-','-', '-', '-'], 
+        ['d1','d2','d3', '']
+      ]);
+
+
+    });
+  });
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  describe("get_column_widths", function() {
+
+    it("should load the proper column widths", function() {
+
+      // GIVEN
+      mtf.cells = [
+        ['h1', 'h2', 'header_number_3'],
+        ['-','-','-'],
+        ['data_1', 'd2', 'data_3']
+      ];
+
+      // WHEN
+      mtf.get_column_widths();
 
       // THEN
-      expect(mtf.input_cells).toEqual([ 
-        ['', 'h1', 'h2', 'h3', ''], 
-        ['', '--', '--', '--', ''], 
-        ['', 'd1', 'd2', '', '']
+      expect(mtf.column_widths).toEqual([6,2,15]);
+
+    });
+
+  });
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  describe("import_table", function() {
+
+    it("should import a basic table properly", function() {
+
+      // WHEN
+      mtf.import_table('|h1|h2|\n|-|-|\n|d1|d2|');
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
+
+    it("should strip external white space when importing table", function() {
+
+      // WHEN
+      mtf.import_table('| h1 |h2 |  h3|\n|-|-|-|\n|   d1|d2   |       d3     |');
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2', 'h3'], ['-','-', '-'], ['d1','d2','d3'] ]);
+
+    });
+
+    it("should reduce the items in the separator row so they don't mess with spacing", function() {
+
+      // GIVEN
+      table  = "| h1 | h2 |\n";
+      table += "|-------|--------|\n";
+      table += "| d1 | d2 |";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
+
+    it("should not add empty rows for empty lines", function() {
+
+      // GIVEN
+      table  = "| h1 | h2 |\n";
+      table += "|----|----|\n";
+      table += "| d1 | d2 |\n\n\n\n";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
+
+  });
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("initialization", function() {
+
+    it("should initialize instance variables", function() {
+
+      // GIVEN
+      // Initialization happened in before.
+
+      // THEN
+      expect(mtf.cells.length).toEqual(0);
+      expect(mtf.output_table).toEqual("");
+      expect(mtf.column_widths).toEqual([]);
+
+    });
+  });
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  describe("pad_cells_for_output", function() {
+
+    it("should add the proper white space to each cell", function() {
+
+      // GIVEN
+      mtf.cells = [
+        ['h1', 'header', 'header_number_3'],
+        ['--', '------', '---------------'],
+        ['data_1', 'd2', 'data_3']
+      ];
+
+      // WHEN
+      mtf.get_column_widths();
+      mtf.pad_cells_for_output();
+
+      // THEN
+      expect(mtf.cells).toEqual([
+        ['h1    ', 'header', 'header_number_3'],
+        ['------', '------', '---------------'],
+        ['data_1', 'd2    ', 'data_3         ']
       ]);
 
     });
@@ -238,88 +172,64 @@ describe("MarkdownTableFormatter", function() {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  describe("set_output_table", function() {
+  describe("Integration Tests", function() {
 
-    it("should properly build a basic table", function() {
+    it("should build a basic table", function() {
 
-      // GIVEN
-      output_cells = [ ['', ' h1 ', ' h2 ', ' h3 ', ''], ['', '----', '----', '----', ''], ['', ' d1 ', ' d2 ', ' d3 ', ''] ];
-
-      output_table = "";
-      output_table += "| h1 | h2 | h3 |\n";
-      output_table += "|----|----|----|\n";
-      output_table += "| d1 | d2 | d3 |\n";
+      // GIVEN 
+      table = "|h1|h2|\n|--|--|\n|d1|d2|";
 
       // WHEN
-      mtf.set_output_table(output_cells)
+      mtf.format_table(table);
 
-      // THEN
-      expect(mtf.output_table).toEqual(output_table);
+      // THEN 
+      expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n");
 
     });
 
-  });
+    it("should format a table with different length cells", function() {
 
+      // GIVEN 
+      table = "|h1|h2|header3|\n|-----|----------|-------|\n|data1|data_cell2|d3|";
 
-  ////////////////////////////////////////////////////////////////////////////////
+      // WHEN
+      mtf.format_table(table);
 
-  describe("Test full table builds", function() {
+      // THEN 
+      expect(mtf.output_table).toEqual("| h1    | h2         | header3 |\n|-------|------------|---------|\n| data1 | data_cell2 | d3      |\n");      
 
-    // Note that the tool puts a newline after the last row. This is 
-    // desired, but can catch you off guard if you don't notice and 
-    // add it when writing test comparisons.
+    });
+
+    it("should build a table where cells are added", function() {
+
+      // GIVEN
+      table = "|h1|h2|\n|-|-|\n|d1|d2|\n|e1|";
+
+      // WHEN
+      mtf.format_table(table);
+
+      // THEN 
+      expect(mtf.output_table).toEqual("| h1 | h2 |\n|----|----|\n| d1 | d2 |\n| e1 |    |\n");
+
+    });
 
     it("should not alter an already formatted table", function() {
 
-      // GIVEN
-      input_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |";
-      output_table = "| h1 | h2 | h3 |\n|----|----|----|\n| d1 | d2 | d3 |\n";
+      // GIVEN 
+      table  = "| header1 | h2         | header three |\n";
+      table += "|---------|------------|--------------|\n";
+      table += "| data1   | data_cell2 | d3           |\n";
+      table += "| row e   | e2         |              |\n";
 
-      // THEN
-      expect(mtf.format_table(input_table)).toEqual(output_table);
+      // WHEN
+      mtf.format_table(table);
 
-    });
-
-    it("should update a standard table properly", function() {
-
-      // GIVEN
-      input_table = ""
-      input_table += "|h1|h2_more|h3_longer|\n";
-      input_table += "|-|-|-|\n";
-      input_table += "|d1|d2|d3|";
-
-      output_table = "";
-      output_table += "| h1 | h2_more | h3_longer |\n";
-      output_table += "|----|---------|-----------|\n";
-      output_table += "| d1 | d2      | d3        |\n";
-
-      // THEN
-      expect(mtf.format_table(input_table)).toEqual(output_table);
-      
-    });
-
-    it("should add empty cells where necessary", function() {
-
-      // GIVEN
-      input_table = ""
-      input_table += "|h1|h2_more|h3_longer|\n";
-      input_table += "|-|-|-|\n";
-      input_table += "|d1|d2|d3|\n";
-      input_table += "|e1|e2|\n";
-      input_table += "|f1|\n";
-
-      output_table = "";
-      output_table += "| h1 | h2_more | h3_longer |\n";
-      output_table += "|----|---------|-----------|\n";
-      output_table += "| d1 | d2      | d3        |\n";
-      output_table += "| e1 | e2      |           |\n";
-      output_table += "| f1 |         |           |\n";
-
-      // THEN
-      expect(mtf.format_table(input_table)).toEqual(output_table);
+      // THEN 
+      expect(mtf.output_table).toEqual(table);
 
     });
 
   });
+
 
 });
