@@ -246,26 +246,26 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should add starting and end pipes for tables that don't have them by default", function() {
+    it("should add starting and end pipes for tables that don't have them by default", function() {
 
-    //   // GIVEN
-    //   table  = "header1 | h2         | header three\n";
-    //   table += "--------|------------|-------------\n";
-    //   table += "data1   | data_cell2 | d3          \n";
-    //   table += "row e   | e2         |             \n";
+      // GIVEN
+      table  = "header1 | h2         | header three\n";
+      table += "--------|------------|-------------\n";
+      table += "data1   | data_cell2 | d3\n";
+      table += "row e   | e2         |\n";
 
-    //   output  = "| header1 | h2         | header three |\n";
-    //   output += "|---------|------------|--------------|\n";
-    //   output += "| data1   | data_cell2 | d3           |\n";
-    //   output += "| row e   | e2         |              |\n";
+      output  = "| header1 | h2         | header three |\n";
+      output += "|---------|------------|--------------|\n";
+      output += "| data1   | data_cell2 | d3           |\n";
+      output += "| row e   | e2         |              |\n";
 
-    //   // WHEN
-    //   mtf.format_table(table);
+      // WHEN
+      mtf.format_table(table);
 
-    //   // THEN
-    //   expect(mtf.output_table).toEqual(output);
+      // THEN
+      expect(mtf.output_table).toEqual(output);
 
-    // });
+    });
 
   });
 
