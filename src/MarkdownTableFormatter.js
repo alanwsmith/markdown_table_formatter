@@ -100,12 +100,21 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
       this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/^\s+/g,"");
       this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/\s+$/g,"");
 
-      // If it's the separator row, just put in a single dash
+      // If it's the separator row, parse down the dashes
+      // Only do this if it matches to avoid adding a
+      // dash in an empty column and messing with the column widths.
       if (row_i == 1) {
-        this.cells[row_i][col_i] = "-";
+        this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/-+/g,"-");
       }
     }
   }
+
+
+  // this.get_column_widths();
+
+  // console.log(this.column_widths);
+
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
