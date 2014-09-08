@@ -23,7 +23,7 @@ function loadExample(example_number) {
       document.getElementById('md_table_holder').value = "h1 | h2 | h3\n-|-|-\ndata-1 | data-2 | data-3";
       break;
     case 3:
-      document.getElementById('md_table_holder').value = "| Header 1 | Header 2 | Header 3 |\n|----|---|-|\n| data1a | Data is longer than header | 1 |\n| d1b | add a cell|\n|lorem|ipsum|3|\n| |TODO: empty outside cells\n| skip| | 5 |\n| six | Morbi purus | 6 |";
+      document.getElementById('md_table_holder').value = "| Header 1 | Header 2 | Header 3 |\n|----|---|-|\n| data1a | Data is longer than header | 1 |\n| d1b | add a cell|\n|lorem|ipsum|3|\n| | empty outside cells\n| skip| | 5 |\n| six | Morbi purus | 6 |";
 
 
   }
@@ -48,14 +48,7 @@ textarea { font-family: monospace; font-size: 14px; }
   </p>
 
   <form>  
-    <textarea id="md_table_holder" cols="110" rows="20">| Header 1 | Header 2 | Header 3 |
-|-|---|-|
-| data1a | Data is longer than header | 1 |
-| d1b | add a cell|
-|lorem|ipsum|3|
-| |TODO: empty outside cells
-| skip| | 5 |
-| six | Morbi purus | 6 |</textarea>
+    <textarea id="md_table_holder" cols="110" rows="20"></textarea>
     <br>
     <input type="button" value="Format Table" onclick="format_table();"></input>
   </form>

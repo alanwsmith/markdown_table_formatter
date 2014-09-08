@@ -285,7 +285,31 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-  });
+    it("should format a table without removing cells that should remain", function() {
 
+      table  = "|h1|h2|h3|h4|\n";
+      table += "|--|--|--|--|\n";
+      table += "|d1|d2|d3|\n";
+      table += "|e1|e2|e3\n";
+      table += "|f1|f2|\n";
+      table += "|g1|g2\n";
+
+      output  = "| h1 | h2 | h3 | h4 |\n";
+      output += "|----|----|----|----|\n";
+      output += "| d1 | d2 | d3 |    |\n";
+      output += "| e1 | e2 | e3 |    |\n";
+      output += "| f1 | f2 |    |    |\n";
+      output += "| g1 | g2 |    |    |\n";
+
+      // WHEN
+      mtf.format_table(table);
+
+      // THEN
+      expect(mtf.output_table).toEqual(output);
+
+
+    });
+
+  });
 
 });
