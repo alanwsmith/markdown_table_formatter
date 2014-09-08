@@ -56,6 +56,8 @@ MarkdownTableFormatter.prototype.format_table = function(table) {
 
 MarkdownTableFormatter.prototype.get_column_widths = function() {
 
+  this.column_widths = new Array();
+
   for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
     for (var col_i = 0, col_l = this.cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
       if (typeof this.column_widths[col_i] === 'undefined') {
@@ -92,7 +94,7 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
     // TODO: Update so removal of first and last empty columns
     // is only done with "|data|data|" rows and note for
     // "data|data" rows without leading and ending pipes.
-    row_columns.shift();
+    // row_columns.shift();
     row_columns.pop();
 
     for (var col_i = 0, col_l = row_columns.length; col_i < col_l; col_i = col_i + 1) {
@@ -110,10 +112,13 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
   }
 
 
-  // this.get_column_widths();
+  this.get_column_widths();
 
-  // console.log(this.column_widths);
-
+  if (this.column_widths[0] == 0) {
+    for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+      this.cells[row_i].shift();
+    }
+  }
 
 }
 
