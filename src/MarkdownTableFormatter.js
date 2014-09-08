@@ -80,7 +80,6 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
 
   for (var row_i = 0, row_l = table_rows.length; row_i < row_l; row_i = row_i + 1) {
 
-
     // TODO: Set up the indexes so that empty lines at either the top or bottom will
     // be removed. Right now, this is only helpful for empty lines at the bottom.
     if(table_rows[row_i].indexOf('|') == -1) {
@@ -90,12 +89,6 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
     this.cells[row_i] = new Array();
 
     var row_columns = table_rows[row_i].split("\|");
-
-    // TODO: Update so removal of first and last empty columns
-    // is only done with "|data|data|" rows and note for
-    // "data|data" rows without leading and ending pipes.
-    // row_columns.shift();
-    row_columns.pop();
 
     for (var col_i = 0, col_l = row_columns.length; col_i < col_l; col_i = col_i + 1) {
       this.cells[row_i][col_i] = row_columns[col_i]
@@ -112,13 +105,23 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
   }
 
 
+  // Remove leading and trailing rows if they are empty.
   this.get_column_widths();
-
+  
   if (this.column_widths[0] == 0) {
     for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
       this.cells[row_i].shift();
     }
   }
+
+  // check to see if the last item in column widths is empty
+  if (this.column_widths[ (this.column_widths.length - 1) ] == 0) {
+    for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+      this.cells[row_i].pop();
+    }    
+  }
+
+  this.get_column_widths();
 
 }
 

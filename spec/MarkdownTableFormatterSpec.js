@@ -119,22 +119,20 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should import tables that don't start with pipes", function() {
+    it("should import tables that don't start with pipes", function() {
       
-    //   // GIVEN
-    //   table  = "h1 | h2\n";
-    //   table += "-|-\n";
-    //   table += "d1 | d2\n";
+      // GIVEN
+      table  = "h1 | h2\n";
+      table += "-|-\n";
+      table += "d1 | d2\n";
 
-    //   // WHEN
-    //   mtf.import_table(table);
-    //   mtf.get_column_widths();
+      // WHEN
+      mtf.import_table(table);
 
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
 
-    //   // THEN
-    //   expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
-
-    // });
+    });
 
 
   });
