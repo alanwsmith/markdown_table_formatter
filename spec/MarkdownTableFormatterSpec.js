@@ -134,6 +134,24 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+    it("should not chomp the last column from short rows", function() {
+
+      // GIVEN
+      table  = "|h1|h2|h3|h4|\n";
+      table += "|--|--|--|--|\n";
+      table += "|d1|d2|d3|\n";
+      table += "|e1|e2|e3\n";
+      table += "|f1|f2|\n";
+      table += "|g1|g2\n";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1','h2','h3','h4'], ['-','-','-','-'], ['d1','d2','d3', ''], ['e1','e2','e3'], ['f1','f2',''], ['g1','g2'] ]);
+
+    });
+
 
   });
 

@@ -114,10 +114,15 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
     }
   }
 
+  this.get_column_widths();
+
   // check to see if the last item in column widths is empty
   if (this.column_widths[ (this.column_widths.length - 1) ] == 0) {
     for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
-      this.cells[row_i].pop();
+      // Only remove the row if it is in the proper last slot.
+      if (this.cells[row_i].length == this.column_widths.length) {
+        this.cells[row_i].pop();
+      }
     }    
   }
 
