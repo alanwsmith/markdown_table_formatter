@@ -152,6 +152,22 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+    it("should ignore empty lines above the table", function() {
+
+      // GIVEN
+      table  = "\n\n\n";
+      table += "h1 | h2\n";
+      table += "-|-\n";
+      table += "d1 | d2\n";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
+
 
   });
 

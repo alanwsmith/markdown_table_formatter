@@ -78,6 +78,11 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
   
   var table_rows = table.split("\n");
 
+  // Remove leading empty lines
+  while (table_rows[0].indexOf('|') == -1) {
+    table_rows.shift();
+  }
+
   for (var row_i = 0, row_l = table_rows.length; row_i < row_l; row_i = row_i + 1) {
 
     // TODO: Set up the indexes so that empty lines at either the top or bottom will
