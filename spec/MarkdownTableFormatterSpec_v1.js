@@ -29,75 +29,63 @@ describe("MarkdownTableFormatter", function() {
   });
 
 
-  ////////////////////////////////////////////////////////////////////////////////
 
-  // describe("fill_empty_body_cells", function() {
+
+
+  // ////////////////////////////////////////////////////////////////////////////////
+
+  // describe("load_body_cells", function() {
+
+  //   it("should properly load basic data cells", function() {
 
   //     // GIVEN
-  //     mtf.source_table = "|h1|h2|h3|h4|\n|-|-|\n|d1|d2|d3|\n|e1|e2|\n|f1|f2|f3|f4|\n\n";
+  //     mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
 
   //     // WHEN
   //     mtf.load_body_cells();
 
   //     // THEN
-  //     expect(mtf.body_cells).toEqual([['', 'd1', 'd2', 'd3', '', ''], ['', 'e1', 'e2', '', '', ''], ['', 'f1', 'f2', 'f3', 'f4', '']]);
+  //     expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
 
-  // });
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-  // describe("calculate_column_widths", function() {
+  //   });
 
 
-  //   // GIVEN
-  //   // mtf.header_cells = [['', 'h1', 'h2', '']];
-  //   // mtf.body_cells = [['', 'd1', 'd2', '']];
-
-  //   // // WHEN
-  //   // mtf.load_header_cells();
-  //   // mtf.load_body_cells();
-
-
-  // });
-
-
-
-  ////////////////////////////////////////////////////////////////////////////////
-
-  describe("initialization", function() {
-
-    it("should properly initialize the instance variables", function() {
-
-      // GIVEN
-      mtf = new MarkdownTableFormatter();
-
-      // THEN
-      expect(mtf.column_widths.length).toEqual(0);
-      expect(mtf.input_cells.length).toEqual(0);
-      expect(mtf.output_cells.length).toEqual(0);
-
-    });
-
-  });
-
-
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // describe("calculate_column_widths", function() {
-
-  //   it("should set basic column widths properly", function() {
-
+  //   it("should should strip white space from data cells", function() {
   //     // GIVEN
-  //     mtf.header_cells = [['', 'h1', 'h2', '']];
-  //     mtf.body_cells = [['', 'd1', 'd2', '']];
+  //     mtf.source_table = "|h1|h2|\n|-|-|\n| d1 |   d2    |";
 
   //     // WHEN
-  //     mtf.calculate_column_widths();
+  //     mtf.load_body_cells();
 
   //     // THEN
-  //     expect(mtf.column_widths).toEqual([0,2,2,0]);
+  //     expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);      
+  //   });
+
+
+  //   it("should skip lines with just white space", function() {
+
+  //     // GIVEN
+  //     mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n\n\n\n";
+
+  //     // WHEN
+  //     mtf.load_body_cells();
+
+  //     // THEN
+  //     expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
+
+  //   });
+
+
+  //   it("should pull in multiple lines", function() {
+
+  //     // GIVEN
+  //     mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n|e1|e2|\n|f1|f2|\n\n";
+
+  //     // WHEN
+  //     mtf.load_body_cells();
+
+  //     // THEN
+  //     expect(mtf.body_cells).toEqual([['', 'd1', 'd2', ''], ['', 'e1', 'e2', ''], ['', 'f1', 'f2', '']]);
 
   //   });
 
@@ -106,99 +94,37 @@ describe("MarkdownTableFormatter", function() {
 
 
 
-  ////////////////////////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////////////////////////
 
-  describe("load_body_cells", function() {
+  // describe("load_header_cells", function() {
 
-    it("should properly load basic data cells", function() {
+  //   it("should load basic header cells", function() {
 
-      // GIVEN
-      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
-
-      // WHEN
-      mtf.load_body_cells();
-
-      // THEN
-      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
-
-    });
-
-
-    it("should should strip white space from data cells", function() {
-      // GIVEN
-      mtf.source_table = "|h1|h2|\n|-|-|\n| d1 |   d2    |";
-
-      // WHEN
-      mtf.load_body_cells();
-
-      // THEN
-      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);      
-    });
-
-
-    it("should skip lines with just white space", function() {
-
-      // GIVEN
-      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n\n\n\n";
-
-      // WHEN
-      mtf.load_body_cells();
-
-      // THEN
-      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', '']]);
-
-    });
-
-
-    it("should pull in multiple lines", function() {
-
-      // GIVEN
-      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|\n|e1|e2|\n|f1|f2|\n\n";
-
-      // WHEN
-      mtf.load_body_cells();
-
-      // THEN
-      expect(mtf.body_cells).toEqual([['', 'd1', 'd2', ''], ['', 'e1', 'e2', ''], ['', 'f1', 'f2', '']]);
-
-    });
-
-  });
-
-
-
-
-  ////////////////////////////////////////////////////////////////////////////////
-
-  describe("load_header_cells", function() {
-
-    it("should load basic header cells", function() {
-
-      // GIVEN
-      mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
+  //     // GIVEN
+  //     mtf.source_table = "|h1|h2|\n|-|-|\n|d1|d2|";
       
-      // WHEN
-      mtf.load_header_cells();
+  //     // WHEN
+  //     mtf.load_header_cells();
 
-      // THEN
-      expect(mtf.header_cells).toEqual([['', 'h1', 'h2', '']]);
+  //     // THEN
+  //     expect(mtf.header_cells).toEqual([['', 'h1', 'h2', '']]);
       
-    });
+  //   });
 
-    it("should remove white space from header cells", function() {
+  //   it("should remove white space from header cells", function() {
 
-      // GIVEN
-      mtf.source_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
+  //     // GIVEN
+  //     mtf.source_table = "|h1| h2| h3 |h4  |\n|-|-|-|-|\n| d1| d2 |d3|d4  |";
 
-      // WHEN
-      mtf.load_header_cells();
+  //     // WHEN
+  //     mtf.load_header_cells();
 
-      // THEN
-      expect(mtf.header_cells).toEqual([['', 'h1', 'h2', 'h3', 'h4', '']]);
+  //     // THEN
+  //     expect(mtf.header_cells).toEqual([['', 'h1', 'h2', 'h3', 'h4', '']]);
       
-    });
+  //   });
 
-  });
+  // });
 
 
 
