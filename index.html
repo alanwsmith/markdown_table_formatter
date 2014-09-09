@@ -24,46 +24,51 @@ function loadExample(example_number) {
       break;
     case 3:
       document.getElementById('md_table_holder').value = "| Header 1 | Header 2 | Header 3 |\n|----|---|-|\n| data1a | Data is longer than header | 1 |\n| d1b | add a cell|\n|lorem|ipsum|3|\n| | empty outside cells\n| skip| | 5 |\n| six | Morbi purus | 6 |";
-
-
   }
 }
 
   </script>
   <style type="text/css">
-textarea { font-family: monospace; font-size: 14px; }
+body { background-color: #e6e6e2; }
+#mainWrapper { width: 850px; margin: auto;}
+textarea { width: 850px; height: 300px; font-family: monospace; font-size: 14px; }
 .footer { font-size: 13px; }
+#button_wrapper { text-align: right; padding-bottom: 18px; }
   </style>
 </head>
 <body>
-  <h1>Markdown Table Formatter</h1>
-  <p>This tool is a very early stage work in progress. When finished it will &quot;Pretty Print&quot; MultiMarkdown style tables.</p>
-  <p>Only the most basic, well-formed tables are currently processed correctly. Your Mileage May Vary.</p>
-  <p>To see what it's all about, try one of these examples, or format your own.</p>
+  <div id="mainWrapper">
+    <h1>Markdown Table Formatter</h1>
+    <p>This tool formats basic MultiMarkdown style tables for easier plain text reading. It adds padding to all the cells to line up the pipe separators when using a mono-space font.</p>
+    
+    <p>To see what it's all about, try one of these examples, or format your own.</p>
 
-  <p>Load: 
-    <a href="#" onClick="loadExample(1); return false;">Example 1</a> - 
-    <a href="#" onClick="loadExample(2); return false;">Example 2</a> - 
-    <a href="#" onClick="loadExample(3); return false;">Example 3</a>
+    <p>Load: 
+      <a href="#" onClick="loadExample(1); return false;">Example 1</a> - 
+      <a href="#" onClick="loadExample(2); return false;">Example 2</a> - 
+      <a href="#" onClick="loadExample(3); return false;">Example 3</a>
+    </p>
+
+    <form>  
+      <textarea id="md_table_holder"></textarea>
+      <div id="button_wrapper">
+        <input id="format_button" type="button" value="Format Table" onclick="format_table();"></input>
+      </div>
+
+    </form>
+    
+  <hr>  
+
+  <p class="footer">
+    For more information:<br>
+    I'm on Twitter as <a href="https://twitter.com/TheIdOfAlan">@TheIdOfAlan</a><br>
+    I sometimes post on my personal site <a href="http://alanwsmith.com/">alanwsmith.com</a><br>
+    This is an Open Source <a href="https://github.com/alanwsmith/markdown_table_formatter">GitHub Project</a>.<br>
+    It has a <a href="test_run.html">Jasmine Test Suite</a>.<br>
+    What to show your appreciation? <a href="http://amzn.com/w/3PH1RJFZZFCO2">Buy me a book</a><br>
   </p>
 
-  <form>  
-    <textarea id="md_table_holder" cols="110" rows="20"></textarea>
-    <br>
-    <input type="button" value="Format Table" onclick="format_table();"></input>
-  </form>
-  
-<hr>  
-
-<p class="footer">
-  For more information:<br>
-  I'm on Twitter as <a href="https://twitter.com/TheIdOfAlan">@TheIdOfAlan</a><br>
-  I sometimes post on my personal site <a href="http://alanwsmith.com/">alanwsmith.com</a><br>
-  This is an Open Source <a href="https://github.com/alanwsmith/markdown_table_formatter">GitHub Project</a>.<br>
-  It has a <a href="test_run.html">Jasmine Test Suite</a>.<br>
-  What to show your appreciation? <a href="http://amzn.com/w/3PH1RJFZZFCO2">Buy me a book</a><br>
-</p>
-
+</div>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
