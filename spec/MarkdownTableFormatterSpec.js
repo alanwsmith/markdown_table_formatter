@@ -119,22 +119,54 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should import tables that don't start with pipes", function() {
+    it("should import tables that don't start with pipes", function() {
       
-    //   // GIVEN
-    //   table  = "h1 | h2\n";
-    //   table += "-|-\n";
-    //   table += "d1 | d2\n";
+      // GIVEN
+      table  = "h1 | h2\n";
+      table += "-|-\n";
+      table += "d1 | d2\n";
 
-    //   // WHEN
-    //   mtf.import_table(table);
-    //   mtf.get_column_widths();
+      // WHEN
+      mtf.import_table(table);
 
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
 
-    //   // THEN
-    //   expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+    });
 
-    // });
+    it("should not chomp the last column from short rows", function() {
+
+      // GIVEN
+      table  = "|h1|h2|h3|h4|\n";
+      table += "|--|--|--|--|\n";
+      table += "|d1|d2|d3|\n";
+      table += "|e1|e2|e3\n";
+      table += "|f1|f2|\n";
+      table += "|g1|g2\n";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1','h2','h3','h4'], ['-','-','-','-'], ['d1','d2','d3', ''], ['e1','e2','e3'], ['f1','f2',''], ['g1','g2'] ]);
+
+    });
+
+    it("should ignore empty lines above the table", function() {
+
+      // GIVEN
+      table  = "\n\n\n";
+      table += "h1 | h2\n";
+      table += "-|-\n";
+      table += "d1 | d2\n";
+
+      // WHEN
+      mtf.import_table(table);
+
+      // THEN
+      expect(mtf.cells).toEqual([ ['h1', 'h2'], ['-','-'], ['d1','d2'] ]);
+
+    });
 
 
   });
@@ -248,28 +280,52 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
-    // it("should add starting and end pipes for tables that don't have them by default", function() {
+    it("should add starting and end pipes for tables that don't have them by default", function() {
 
-    //   // GIVEN
-    //   table  = "header1 | h2         | header three\n";
-    //   table += "--------|------------|-------------\n";
-    //   table += "data1   | data_cell2 | d3          \n";
-    //   table += "row e   | e2         |             \n";
+      // GIVEN
+      table  = "header1 | h2         | header three\n";
+      table += "--------|------------|-------------\n";
+      table += "data1   | data_cell2 | d3\n";
+      table += "row e   | e2         |\n";
 
-    //   output  = "| header1 | h2         | header three |\n";
-    //   output += "|---------|------------|--------------|\n";
-    //   output += "| data1   | data_cell2 | d3           |\n";
-    //   output += "| row e   | e2         |              |\n";
+      output  = "| header1 | h2         | header three |\n";
+      output += "|---------|------------|--------------|\n";
+      output += "| data1   | data_cell2 | d3           |\n";
+      output += "| row e   | e2         |              |\n";
 
-    //   // WHEN
-    //   mtf.format_table(table);
+      // WHEN
+      mtf.format_table(table);
 
-    //   // THEN
-    //   expect(mtf.output_table).toEqual(output);
+      // THEN
+      expect(mtf.output_table).toEqual(output);
 
-    // });
+    });
+
+    it("should format a table without removing cells that should remain", function() {
+
+      table  = "|h1|h2|h3|h4|\n";
+      table += "|--|--|--|--|\n";
+      table += "|d1|d2|d3|\n";
+      table += "|e1|e2|e3\n";
+      table += "|f1|f2|\n";
+      table += "|g1|g2\n";
+
+      output  = "| h1 | h2 | h3 | h4 |\n";
+      output += "|----|----|----|----|\n";
+      output += "| d1 | d2 | d3 |    |\n";
+      output += "| e1 | e2 | e3 |    |\n";
+      output += "| f1 | f2 |    |    |\n";
+      output += "| g1 | g2 |    |    |\n";
+
+      // WHEN
+      mtf.format_table(table);
+
+      // THEN
+      expect(mtf.output_table).toEqual(output);
+
+
+    });
 
   });
-
 
 });
