@@ -9,6 +9,7 @@ function format_table() {
   var mtf = new MarkdownTableFormatter();
   mtf.format_table(md_table_holder.value)
   md_table_holder.value = mtf.output_table;
+  md_table_holder.select();
 }
 
 function loadExample(example_number) {
