@@ -326,6 +326,21 @@ describe("MarkdownTableFormatter", function() {
 
     });
 
+    it("should keep escaped pipes on the same cells", function() {
+
+      table  = "| h1          | h2     |\n";
+      table += "|-------------|--------|\n";
+      table += "| a           | b \\| c |\n";
+      table += "| a \\| b \\| c | d      |\n";
+
+      // WHEN
+      mtf.format_table(table);
+
+      // THEN
+      expect(mtf.output_table).toEqual(table);
+
+    });
+
   });
 
 });

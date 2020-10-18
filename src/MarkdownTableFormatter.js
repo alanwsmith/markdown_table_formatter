@@ -93,7 +93,7 @@ MarkdownTableFormatter.prototype.import_table = function(table) {
 
     this.cells[row_i] = new Array();
 
-    var row_columns = table_rows[row_i].split("\|");
+    var row_columns = table_rows[row_i].split(/(?<!\\)\|/g);
 
     for (var col_i = 0, col_l = row_columns.length; col_i < col_l; col_i = col_i + 1) {
       this.cells[row_i][col_i] = row_columns[col_i]
